@@ -56,10 +56,10 @@ class AppStrings {
   static const String saveAndNext = 'Save & Next';
   static const String setupConfiguration = 'Setup Configuration';
 
-  static const String stepOneHeading = 'Business & Profile Information';
+  static const String stepOneHeading = 'Basic Information';
   static const String stepOneSubHeading = 'Enter basic identity details';
-  static const String stepTwoHeading = 'Store & Location Details';
-  static const String stepTwoSubHeading = 'Discover your store';
+  static const String stepTwoHeading = 'Business & Profile Information';
+  static const String stepTwoSubHeading = 'Enter basic identity details';
   static const String stepThreeHeading = 'KYC & Verification';
   static const String stepThreeSubHeading = 'KYC & Identification Details';
   static const String stepFourHeading = 'Store & Inventory Setup';
@@ -71,10 +71,13 @@ class AppStrings {
   static const String customerDashboardDescription =
       'Welcome as customer. Customer frontend modules can now be connected.';
   static const String dashboardWelcomeBack = 'Welcome back, Ayushi!';
-  static const String dashboardQuestionText = 'What would you like to wear today?';
-  static const String dashboardSearchHint = 'Search lehenga, saree, sherwani...';
+  static const String dashboardQuestionText =
+      'What would you like to wear today?';
+  static const String dashboardSearchHint =
+      'Search lehenga, saree, sherwani...';
   static const String dashboardFeaturesTitle = 'Onesoff offers';
-  static const String dashboardPersonalizedTitle = 'Personalized Recommendation';
+  static const String dashboardPersonalizedTitle =
+      'Personalized Recommendation';
   static const String dashboardShopByCategoryTitle = 'Shop by category';
   static const String dashboardShopByEventsTitle = 'Shop by events';
   static const String dashboardTrendingNowTitle = 'Trending now';
@@ -101,7 +104,8 @@ class AppStrings {
       'secure payments and discovery features designed to make your special moments memorable.';
   static const String dashboardWhyChooseCta = 'Discover OnesOff';
 
-  static const String dashboardOperationalCitiesTitle = 'Onesoff operational cities';
+  static const String dashboardOperationalCitiesTitle =
+      'Onesoff operational cities';
   static const String dashboardExploreCityCta = 'Let\'s Explore this city';
 
   static const String dashboardNavDashboard = 'Dashboard';
@@ -111,9 +115,11 @@ class AppStrings {
   static const String dashboardNavProfile = 'Profile';
   static const String dashboardSearchScreenTitle = 'Search Products';
   static const String dashboardSearchResultsLabel = 'Search results';
-  static const String dashboardSearchEmpty = 'No products found for your search.';
+  static const String dashboardSearchEmpty =
+      'No products found for your search.';
   static const String storeHeaderTitle = 'Onesoff\'s Store';
-  static const String storeHeaderSubtitle = 'What would you like to wear today?';
+  static const String storeHeaderSubtitle =
+      'What would you like to wear today?';
   static const String storeCategoryTabTitle = 'Category';
 
   static const String vendorDashboardTitle = 'Vendor Dashboard';

@@ -17,166 +17,202 @@ class VendorOnboardingScreen extends GetView<VendorOnboardingController> {
     return Scaffold(
       backgroundColor: const Color(0xFFF3F3F5),
       body: SafeArea(
-        child: Obx(
-          () {
-            final int step = controller.currentStep.value;
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                //header 
-                Padding(
+        child: Obx(() {
+          final int step = controller.currentStep.value;
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              //header
+              Padding(
+                padding: EdgeInsets.fromLTRB(
+                  DeviceResponsive.w(context, 16),
+                  DeviceResponsive.h(context, 12),
+                  DeviceResponsive.w(context, 16),
+                  DeviceResponsive.h(context, 8),
+                ),
+                child: Text(
+                  AppStrings.vendorRegistrationTitle,
+                  style: TextStyle(
+                    color: AppColors.onSurface,
+                    fontSize: DeviceResponsive.sp(
+                      context,
+                      14,
+                      minScale: 0.92,
+                      maxScale: 1.2,
+                    ),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: DeviceResponsive.w(context, 16),
+                ),
+                child: Text(
+                  //TODO: fix Logic UI mismatch in total steps for common screen
+                  'Step ${step + 1} of ${controller.totalSteps}',
+                  style: TextStyle(
+                    color: AppColors.textSecondary,
+                    fontSize: DeviceResponsive.sp(
+                      context,
+                      12,
+                      minScale: 0.92,
+                      maxScale: 1.14,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: DeviceResponsive.h(context, 8)),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: DeviceResponsive.w(context, 16),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: LinearProgressIndicator(
+                    minHeight: DeviceResponsive.h(context, 8),
+                    value: (step + 1) / controller.totalSteps,
+                    backgroundColor: const Color(0xFFD4D6DB),
+                    borderRadius: BorderRadiusGeometry.circular(50),
+                    color: AppColors.primary,
+                  ),
+                ),
+              ),
+
+              SizedBox(height: DeviceResponsive.h(context, 12)),
+
+              //body
+              Expanded(
+                child: SingleChildScrollView(
+                  keyboardDismissBehavior:
+                      ScrollViewKeyboardDismissBehavior.onDrag,
                   padding: EdgeInsets.fromLTRB(
-                    DeviceResponsive.w(context, 16),
-                    DeviceResponsive.h(context, 12),
-                    DeviceResponsive.w(context, 16),
-                    DeviceResponsive.h(context, 8),
+                    DeviceResponsive.w(context, 14),
+                    0,
+                    DeviceResponsive.w(context, 14),
+                    DeviceResponsive.h(context, 14),
                   ),
-                  child: Text(
-                    AppStrings.vendorRegistrationTitle,
-                    style: TextStyle(
-                      color: AppColors.onSurface,
-                      fontSize: DeviceResponsive.sp(context, 14, minScale: 0.92, maxScale: 1.2),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: DeviceResponsive.w(context, 16)),
-                  child: Text(
-                    'Step ${step + 1} of 5',
-                    style: TextStyle(
-                      color: AppColors.textSecondary,
-                      fontSize: DeviceResponsive.sp(context, 12, minScale: 0.92, maxScale: 1.14),
-                    ),
-                  ),
-                ),
-                SizedBox(height: DeviceResponsive.h(context, 8)),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: DeviceResponsive.w(context, 16)),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: LinearProgressIndicator(
-                      minHeight: DeviceResponsive.h(context, 8),
-                      value: (step + 1) / 5,
-                      backgroundColor: const Color(0xFFD4D6DB),
-                      borderRadius: BorderRadiusGeometry.circular(50),
-                      color: AppColors.primary,
-                    ),
-                  ),
-                ),
-
-                SizedBox(height: DeviceResponsive.h(context, 12)),
-
-                //body
-                Expanded(
-                  child: SingleChildScrollView(
-                    keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-                    padding: EdgeInsets.fromLTRB(
-                      DeviceResponsive.w(context, 14),
-                      0,
-                      DeviceResponsive.w(context, 14),
-                      DeviceResponsive.h(context, 14),
-                    ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFF9F9FA),
-                        borderRadius: BorderRadius.circular(DeviceResponsive.r(context, 14)),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF9F9FA),
+                      borderRadius: BorderRadius.circular(
+                        DeviceResponsive.r(context, 14),
                       ),
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(
-                          DeviceResponsive.w(context, 12),
-                          DeviceResponsive.h(context, 14),
-                          DeviceResponsive.w(context, 12),
-                          DeviceResponsive.h(context, 14),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            _StepHeader(stepIndex: step),
-                            SizedBox(height: DeviceResponsive.h(context, 14)),
-                            _StepBody(stepIndex: step, controller: controller),
-                            SizedBox(height: DeviceResponsive.h(context, 14)),
-                            Row(
-                              children: <Widget>[
-                                if (step > 0) ...<Widget>[
-                                  Expanded(
-                                    child: OutlinedButton(
-                                      onPressed: controller.previousStep,
-                                      style: OutlinedButton.styleFrom(
-                                        foregroundColor: AppColors.primary,
-                                        side: const BorderSide(color: AppColors.primary),
-                                        padding: EdgeInsets.symmetric(
-                                          vertical: DeviceResponsive.h(context, 14),
-                                        ),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(DeviceResponsive.r(context, 10)),
-                                        ),
-                                      ),
-                                      child: Text(
-                                        'Back',
-                                        style: TextStyle(
-                                          fontSize: DeviceResponsive.sp(context, 14, minScale: 0.92, maxScale: 1.14),
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(width: DeviceResponsive.w(context, 10)),
-                                ],
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(
+                        DeviceResponsive.w(context, 12),
+                        DeviceResponsive.h(context, 14),
+                        DeviceResponsive.w(context, 12),
+                        DeviceResponsive.h(context, 14),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          _StepHeader(stepIndex: step, controller: controller),
+                          SizedBox(height: DeviceResponsive.h(context, 14)),
+                          _StepBody(stepIndex: step, controller: controller),
+                          SizedBox(height: DeviceResponsive.h(context, 14)),
+                          Row(
+                            children: <Widget>[
+                              if (step > 0) ...<Widget>[
                                 Expanded(
-                                  flex: step > 0 ? 2 : 1,
-                                  child: ElevatedButton(
-                                    onPressed: controller.nextStep,
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: AppColors.primary,
-                                      foregroundColor: Colors.white,
-                                      padding: EdgeInsets.symmetric(vertical: DeviceResponsive.h(context, 14)),
+                                  child: OutlinedButton(
+                                    onPressed: controller.previousStep,
+                                    style: OutlinedButton.styleFrom(
+                                      foregroundColor: AppColors.primary,
+                                      side: const BorderSide(
+                                        color: AppColors.primary,
+                                      ),
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: DeviceResponsive.h(
+                                          context,
+                                          14,
+                                        ),
+                                      ),
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(DeviceResponsive.r(context, 10)),
+                                        borderRadius: BorderRadius.circular(
+                                          DeviceResponsive.r(context, 10),
+                                        ),
                                       ),
                                     ),
                                     child: Text(
-                                      step == 4 ? AppStrings.setupConfiguration : AppStrings.saveAndNext,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
+                                      'Back',
                                       style: TextStyle(
-                                        fontSize: DeviceResponsive.sp(context, 14, minScale: 0.92, maxScale: 1.14),
+                                        fontSize: DeviceResponsive.sp(
+                                          context,
+                                          14,
+                                          minScale: 0.92,
+                                          maxScale: 1.14,
+                                        ),
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                   ),
                                 ),
+                                SizedBox(
+                                  width: DeviceResponsive.w(context, 10),
+                                ),
                               ],
-                            ),
-                          ],
-                        ),
+                              Expanded(
+                                flex: step > 0 ? 2 : 1,
+                                child: ElevatedButton(
+                                  onPressed: controller.nextStep,
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColors.primary,
+                                    foregroundColor: Colors.white,
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: DeviceResponsive.h(context, 14),
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                        DeviceResponsive.r(context, 10),
+                                      ),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    step == controller.totalSteps - 1
+                                        ? AppStrings.setupConfiguration
+                                        : AppStrings.saveAndNext,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontSize: DeviceResponsive.sp(
+                                        context,
+                                        14,
+                                        minScale: 0.92,
+                                        maxScale: 1.14,
+                                      ),
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
-              ],
-            );
-          },
-        ),
+              ),
+            ],
+          );
+        }),
       ),
     );
   }
 }
 
 class _StepHeader extends StatelessWidget {
-  const _StepHeader({required this.stepIndex});
+  const _StepHeader({required this.stepIndex, required this.controller});
 
   final int stepIndex;
+  final VendorOnboardingController controller;
 
   @override
   Widget build(BuildContext context) {
-    final List<(String, String)> info = <(String, String)>[
-      (AppStrings.stepOneHeading, AppStrings.stepOneSubHeading),
-      (AppStrings.stepTwoHeading, AppStrings.stepTwoSubHeading),
-      (AppStrings.stepThreeHeading, AppStrings.stepThreeSubHeading),
-      (AppStrings.stepFourHeading, AppStrings.stepFourSubHeading),
-      (AppStrings.stepFiveHeading, AppStrings.stepFiveSubHeading),
-    ];
+    final List<(String, String)> info = controller.stepInfo;
 
     return Row(
       children: <Widget>[
@@ -185,7 +221,9 @@ class _StepHeader extends StatelessWidget {
           height: DeviceResponsive.r(context, 48),
           decoration: BoxDecoration(
             color: const Color(0xFFF5ECEF),
-            borderRadius: BorderRadius.circular(DeviceResponsive.r(context, 12)),
+            borderRadius: BorderRadius.circular(
+              DeviceResponsive.r(context, 12),
+            ),
           ),
           child: Icon(
             Icons.assignment_outlined,
@@ -201,7 +239,12 @@ class _StepHeader extends StatelessWidget {
               Text(
                 info[stepIndex].$1,
                 style: TextStyle(
-                  fontSize: DeviceResponsive.sp(context, 14, minScale: 0.92, maxScale: 1.15),
+                  fontSize: DeviceResponsive.sp(
+                    context,
+                    14,
+                    minScale: 0.92,
+                    maxScale: 1.15,
+                  ),
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -210,7 +253,12 @@ class _StepHeader extends StatelessWidget {
                 info[stepIndex].$2,
                 style: TextStyle(
                   color: AppColors.textSecondary,
-                  fontSize: DeviceResponsive.sp(context, 14, minScale: 0.92, maxScale: 1.12),
+                  fontSize: DeviceResponsive.sp(
+                    context,
+                    14,
+                    minScale: 0.92,
+                    maxScale: 1.12,
+                  ),
                 ),
               ),
             ],
@@ -222,33 +270,41 @@ class _StepHeader extends StatelessWidget {
 }
 
 class _StepBody extends StatelessWidget {
-  const _StepBody({
-    required this.stepIndex,
-    required this.controller,
-  });
+  const _StepBody({required this.stepIndex, required this.controller});
 
   final int stepIndex;
   final VendorOnboardingController controller;
 
+  List<Widget> get stepWidget {
+    final steps = [
+      _StepOneCommon(controller: controller),
+      controller.isShopOwner
+          ? _StepTwoShop(controller: controller)
+          : _StepTwoIndividual(controller: controller),
+      controller.isShopOwner
+          ? _StepThreeShop(controller: controller)
+          : _StepThreeIndividual(controller: controller),
+    ];
+
+    if (controller.isShopOwner) {
+      steps.add(_StepFourShop(controller: controller));
+    }
+
+    controller.isShopOwner
+        ? steps.add(_LastStepShop(controller: controller))
+        : steps.add(_LastStepIndividual(controller: controller));
+
+    return steps;
+  }
+
   @override
   Widget build(BuildContext context) {
-    switch (stepIndex) {
-      case 0:
-        return _StepOne(controller: controller);
-      case 1:
-        return _StepTwo(controller: controller);
-      case 2:
-        return _StepThree(controller: controller);
-      case 3:
-        return _StepFour(controller: controller);
-      default:
-        return _StepFive(controller: controller);
-    }
+    return stepWidget[stepIndex];
   }
 }
 
-class _StepOne extends StatelessWidget {
-  const _StepOne({required this.controller});
+class _StepOneCommon extends StatelessWidget {
+  const _StepOneCommon({required this.controller});
 
   final VendorOnboardingController controller;
 
@@ -256,39 +312,24 @@ class _StepOne extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        _FormTextField(
-          label: 'Shop Name',
-          hint: 'Enter shop name',
-          controller: controller.shopNameController,
+        _FormDropdown(
+          label: "Account Type",
+          hint: "Choose your account type",
+          value: controller.selectedAccountType.value,
+          items: controller.accountTypeOptions,
+          onChanged: (value) {
+            controller.selectedAccountType.value = value;
+          },
         ),
         _FormTextField(
           label: 'Owner Name',
           hint: 'Enter owner name',
           controller: controller.ownerNameController,
         ),
-        Obx(
-          () => _FormDropdown(
-            label: 'Account Type',
-            hint: 'Choose your account type',
-            value: controller.selectedAccountType.value,
-            items: controller.accountTypeOptions,
-            onChanged: (String? value) => controller.selectedAccountType.value = value,
-          ),
-        ),
-        Obx(
-          () => _FormDropdown(
-            label: 'Business Type',
-            hint: 'Choose your business type',
-            value: controller.selectedBusinessType.value,
-            items: controller.businessTypeOptions,
-            onChanged: (String? value) => controller.selectedBusinessType.value = value,
-          ),
-        ),
         _FormTextField(
-          label: 'Short Brand Description',
-          hint: 'Describe your brand',
-          controller: controller.shortBrandDescriptionController,
-          maxLines: 2,
+          label: 'Phone Number',
+          hint: 'Enter phone number',
+          controller: controller.shopNameController,
         ),
         _FormTextField(
           label: 'Email [optional]',
@@ -296,13 +337,19 @@ class _StepOne extends StatelessWidget {
           controller: controller.emailController,
           keyboardType: TextInputType.emailAddress,
         ),
+        _FormTextField(
+          label: 'Short Brand Description',
+          hint: 'Describe your brand',
+          controller: controller.shortBrandDescriptionController,
+          maxLines: 2,
+        ),
       ],
     );
   }
 }
 
-class _StepTwo extends StatelessWidget {
-  const _StepTwo({required this.controller});
+class _StepTwoShop extends StatelessWidget {
+  const _StepTwoShop({required this.controller});
 
   final VendorOnboardingController controller;
 
@@ -324,6 +371,18 @@ class _StepTwo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         _FormTextField(
+          label: 'Shop Name',
+          hint: 'Enter store name',
+          controller: controller.shopNameController,
+        ),
+        Obx(
+          () => _UploadPickerField(
+            label: "Upload Shop Logo",
+            selectedFileName: controller.selectedFiles["shop_logo"],
+            onTap: () => controller.pickFile("shop_logo"),
+          ),
+        ),
+        _FormTextField(
           label: 'Shop Address',
           hint: 'Enter store address',
           controller: controller.shopAddressController,
@@ -335,13 +394,14 @@ class _StepTwo extends StatelessWidget {
             hint: 'Select state',
             value: controller.selectedState.value,
             onTap: () async {
-              final String? selected = await SearchableSingleSelectBottomSheet.show(
-                context: context,
-                title: 'Select state',
-                options: controller.allStates,
-                initialValue: controller.selectedState.value,
-                searchHint: 'Search state',
-              );
+              final String? selected =
+                  await SearchableSingleSelectBottomSheet.show(
+                    context: context,
+                    title: 'Select state',
+                    options: controller.allStates,
+                    initialValue: controller.selectedState.value,
+                    searchHint: 'Search state',
+                  );
               controller.updateState(selected);
             },
           ),
@@ -356,13 +416,14 @@ class _StepTwo extends StatelessWidget {
             enabled: controller.selectedState.value != null,
             onTap: () async {
               if (controller.selectedState.value == null) return;
-              final String? selected = await SearchableSingleSelectBottomSheet.show(
-                context: context,
-                title: 'Select city',
-                options: controller.availableCities,
-                initialValue: controller.selectedCity.value,
-                searchHint: 'Search city',
-              );
+              final String? selected =
+                  await SearchableSingleSelectBottomSheet.show(
+                    context: context,
+                    title: 'Select city',
+                    options: controller.availableCities,
+                    initialValue: controller.selectedCity.value,
+                    searchHint: 'Search city',
+                  );
               controller.updateCity(selected);
             },
           ),
@@ -384,12 +445,28 @@ class _StepTwo extends StatelessWidget {
         ),
         Obx(
           () => _FormDropdown(
+            label: 'Year Of experience in business',
+            hint: 'Select years of experience',
+            value: controller.selectedExperience.value,
+            items: controller.workingExperienceOptions,
+            onChanged: (String? value) =>
+                controller.selectedExperience.value = value,
+          ),
+        ),
+        Obx(
+          () => _FormDropdown(
             label: 'Store Type',
             hint: 'Select store type',
             value: controller.selectedStoreType.value,
             items: controller.storeTypeOptions,
-            onChanged: (String? value) => controller.selectedStoreType.value = value,
+            onChanged: (String? value) =>
+                controller.selectedStoreType.value = value,
           ),
+        ),
+        _FormTextField(
+          label: 'GST Number [optional]',
+          hint: 'Share google business profile link',
+          controller: controller.googleBusinessProfileController,
         ),
         Obx(
           () => _MultiSelectField(
@@ -397,13 +474,16 @@ class _StepTwo extends StatelessWidget {
             hint: 'Select all working days',
             values: controller.selectedWorkingDays.toList(growable: false),
             onTap: () async {
-              final List<String>? selected = await SearchableMultiSelectBottomSheet.show(
-                context: context,
-                title: 'Select working days',
-                options: controller.workingDayOptions,
-                initialValues: controller.selectedWorkingDays.toList(growable: false),
-                searchHint: 'Search working days',
-              );
+              final List<String>? selected =
+                  await SearchableMultiSelectBottomSheet.show(
+                    context: context,
+                    title: 'Select working days',
+                    options: controller.workingDayOptions,
+                    initialValues: controller.selectedWorkingDays.toList(
+                      growable: false,
+                    ),
+                    searchHint: 'Search working days',
+                  );
               if (selected == null) return;
               controller.updateWorkingDays(selected);
             },
@@ -470,7 +550,28 @@ class _StepTwo extends StatelessWidget {
             subtitle:
                 'Allow customers to visit your store and try outfits before renting by booking available time slots.',
             value: controller.isTrialAvailable.value,
-            onChanged: (bool value) => controller.isTrialAvailable.value = value,
+            onChanged: (bool value) =>
+                controller.isTrialAvailable.value = value,
+          ),
+        ),
+        Obx(
+          () => _ToggleInfoCard(
+            title: 'Home Delivery Availability',
+            subtitle:
+                'Enable customers to rent outfits directly with doorstep delivery and return without visiting your store.',
+            value: controller.isHomeDeliveryAvailable.value,
+            onChanged: (bool value) =>
+                controller.isHomeDeliveryAvailable.value = value,
+          ),
+        ),
+        Obx(
+          () => _ToggleInfoCard(
+            title: 'Alteration Support Availability',
+            subtitle:
+                'Offer minor fitting adjustments to ensure the outfit fits the customer perfectly before delivery or pickup.',
+            value: controller.isAlterationSupportAvailable.value,
+            onChanged: (bool value) =>
+                controller.isAlterationSupportAvailable.value = value,
           ),
         ),
       ],
@@ -478,8 +579,103 @@ class _StepTwo extends StatelessWidget {
   }
 }
 
-class _StepThree extends StatelessWidget {
-  const _StepThree({required this.controller});
+class _StepTwoIndividual extends StatelessWidget {
+  final VendorOnboardingController controller;
+  const _StepTwoIndividual({super.key, required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        _FormTextField(
+          label: 'Occupation',
+          hint: 'Tell something about your occupation',
+          maxLines: 2,
+          controller: controller.occupationController,
+        ),
+        Obx(
+          () => _ToggleInfoCard(
+            title: "Do you own multiple outfits",
+            subtitle: "...",
+            value: controller.isMultipleOutfitsAvailable.value,
+            onChanged: (value) =>
+                controller.isMultipleOutfitsAvailable.value = value,
+          ),
+        ),
+        Obx(
+          () => _FormDropdown(
+            label: 'Preffered pickup method',
+            hint: 'self drop',
+            value: controller.selectedPickupMethod.value,
+            items: controller.storeTypeOptions,
+            onChanged: (String? value) =>
+                controller.selectedPickupMethod.value = value,
+          ),
+        ),
+        _FormTextField(
+          label: 'Address (for logistics)',
+          hint: 'Enter an Address for logistics',
+          maxLines: 2,
+          controller: controller.shopAddressController,
+        ),
+        Obx(
+          () => _SingleSelectField(
+            label: 'State',
+            hint: 'Select state',
+            value: controller.selectedState.value,
+            onTap: () async {
+              final String? selected =
+                  await SearchableSingleSelectBottomSheet.show(
+                    context: context,
+                    title: 'Select state',
+                    options: controller.allStates,
+                    initialValue: controller.selectedState.value,
+                    searchHint: 'Search state',
+                  );
+              controller.updateState(selected);
+            },
+          ),
+        ),
+        Obx(
+          () => _SingleSelectField(
+            label: 'City',
+            hint: controller.selectedState.value == null
+                ? 'Select state first'
+                : 'Select city',
+            value: controller.selectedCity.value,
+            enabled: controller.selectedState.value != null,
+            onTap: () async {
+              if (controller.selectedState.value == null) return;
+              final String? selected =
+                  await SearchableSingleSelectBottomSheet.show(
+                    context: context,
+                    title: 'Select city',
+                    options: controller.availableCities,
+                    initialValue: controller.selectedCity.value,
+                    searchHint: 'Search city',
+                  );
+              controller.updateCity(selected);
+            },
+          ),
+        ),
+        _FormTextField(
+          label: 'PIN Code',
+          hint: 'Enter pin code',
+          controller: controller.pinCodeController,
+          keyboardType: TextInputType.number,
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.digitsOnly,
+            LengthLimitingTextInputFormatter(6),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _StepThreeShop extends StatelessWidget {
+  const _StepThreeShop({required this.controller});
 
   final VendorOnboardingController controller;
 
@@ -488,22 +684,11 @@ class _StepThree extends StatelessWidget {
     return Column(
       children: <Widget>[
         _FormTextField(
-          label: 'PAN Card Number',
-          hint: 'Enter PAN Card Number',
-          controller: controller.panCardController,
-        ),
-        Obx(
-          () => _UploadPickerField(
-            label: 'Upload PAN Card',
-            selectedFileName: controller.selectedFiles['pan_card'],
-            onTap: () => controller.pickFile('pan_card'),
-          ),
-        ),
-        _FormTextField(
-          label: 'Aadhaar Number',
-          hint: 'Enter Aadhaar Number',
+          label: 'Aadhaar Card Number',
+          hint: 'Enter Aadhaar Card Number',
           controller: controller.aadhaarController,
         ),
+
         Obx(
           () => _UploadPickerField(
             label: 'Upload Aadhaar Card',
@@ -511,17 +696,18 @@ class _StepThree extends StatelessWidget {
             onTap: () => controller.pickFile('aadhaar_card'),
           ),
         ),
-        _FormTextField(
-          label: 'GST Number. [optional]',
-          hint: 'Enter GST number',
-          controller: controller.gstController,
-        ),
         Obx(
           () => _UploadPickerField(
-            label: 'Upload GST Certificate [optional]',
-            selectedFileName: controller.selectedFiles['gst_certificate'],
-            onTap: () => controller.pickFile('gst_certificate'),
+            label: 'Selfie / Photo Verification Card',
+            selectedFileName: controller.selectedFiles['aadhaar_card'],
+            onTap: () => controller.pickFile('aadhaar_card'),
           ),
+        ),
+        _FormTextField(
+          label: 'Account Number',
+          hint: 'Enter account number',
+          controller: controller.accountNumberController,
+          keyboardType: TextInputType.number,
         ),
         _FormTextField(
           label: 'Bank account holder name',
@@ -534,23 +720,61 @@ class _StepThree extends StatelessWidget {
           controller: controller.bankNameController,
         ),
         _FormTextField(
-          label: 'Account Number',
-          hint: 'Enter account number',
-          controller: controller.accountNumberController,
-          keyboardType: TextInputType.number,
+          label: 'Branch Name',
+          hint: 'Enter Branch Name',
+          controller: controller.bankBranchController,
         ),
+
         _FormTextField(
           label: 'IFSC Code',
-          hint: 'Enter IFSC Code',
+          hint: 'Enter IFSC code',
           controller: controller.ifscController,
         ),
+        _FormTextField(
+          label: 'UPI Id',
+          hint: 'Enter UPI id',
+          controller: controller.upiController,
+        ),
+        Obx(
+          () => _FormDropdown(
+            label: "Business Proof type",
+            hint: "Select business proof type",
+            value: controller.selectedBusinessType.value,
+            items: controller.businessTypeOptions,
+            onChanged: (value) => controller.selectedBusinessType.value = value,
+          ),
+        ),
+
+        if (controller.isBusinessTypeRentAgreement)
+          Obx(() {
+            controller.selectedBusinessType.value;
+            if (controller.isBusinessTypeRentAgreement) {
+              return _UploadPickerField(
+                label: "Upload Rent agreement",
+                selectedFileName: controller.selectedFiles["rent_agreement"],
+                onTap: () => controller.pickFile("rent_agreement"),
+              );
+            }
+            return const SizedBox.shrink();
+          }),
+          
       ],
     );
   }
 }
 
-class _StepFour extends StatelessWidget {
-  const _StepFour({required this.controller});
+class _StepThreeIndividual extends StatelessWidget {
+  final VendorOnboardingController controller;
+  const _StepThreeIndividual({super.key, required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+
+class _StepFourShop extends StatelessWidget {
+  const _StepFourShop({required this.controller});
 
   final VendorOnboardingController controller;
 
@@ -576,15 +800,20 @@ class _StepFour extends StatelessWidget {
           () => _MultiSelectField(
             label: 'Primary Categories',
             hint: 'Select all primary categories',
-            values: controller.selectedPrimaryCategories.toList(growable: false),
+            values: controller.selectedPrimaryCategories.toList(
+              growable: false,
+            ),
             onTap: () async {
-              final List<String>? selected = await SearchableMultiSelectBottomSheet.show(
-                context: context,
-                title: 'Select primary categories',
-                options: controller.primaryCategoryOptions,
-                initialValues: controller.selectedPrimaryCategories.toList(growable: false),
-                searchHint: 'Search categories',
-              );
+              final List<String>? selected =
+                  await SearchableMultiSelectBottomSheet.show(
+                    context: context,
+                    title: 'Select primary categories',
+                    options: controller.primaryCategoryOptions,
+                    initialValues: controller.selectedPrimaryCategories.toList(
+                      growable: false,
+                    ),
+                    searchHint: 'Search categories',
+                  );
               if (selected == null) return;
               controller.updatePrimaryCategories(selected);
             },
@@ -596,13 +825,16 @@ class _StepFour extends StatelessWidget {
             hint: 'Select all target audience',
             values: controller.selectedTargetAudience.toList(growable: false),
             onTap: () async {
-              final List<String>? selected = await SearchableMultiSelectBottomSheet.show(
-                context: context,
-                title: 'Select target audience',
-                options: controller.targetAudienceOptions,
-                initialValues: controller.selectedTargetAudience.toList(growable: false),
-                searchHint: 'Search audience',
-              );
+              final List<String>? selected =
+                  await SearchableMultiSelectBottomSheet.show(
+                    context: context,
+                    title: 'Select target audience',
+                    options: controller.targetAudienceOptions,
+                    initialValues: controller.selectedTargetAudience.toList(
+                      growable: false,
+                    ),
+                    searchHint: 'Search audience',
+                  );
               if (selected == null) return;
               controller.updateTargetAudience(selected);
             },
@@ -614,13 +846,16 @@ class _StepFour extends StatelessWidget {
             hint: 'Select all available sizes',
             values: controller.selectedAvailableSizes.toList(growable: false),
             onTap: () async {
-              final List<String>? selected = await SearchableMultiSelectBottomSheet.show(
-                context: context,
-                title: 'Select available sizes',
-                options: controller.availableSizeOptions,
-                initialValues: controller.selectedAvailableSizes.toList(growable: false),
-                searchHint: 'Search size',
-              );
+              final List<String>? selected =
+                  await SearchableMultiSelectBottomSheet.show(
+                    context: context,
+                    title: 'Select available sizes',
+                    options: controller.availableSizeOptions,
+                    initialValues: controller.selectedAvailableSizes.toList(
+                      growable: false,
+                    ),
+                    searchHint: 'Search size',
+                  );
               if (selected == null) return;
               controller.updateAvailableSizes(selected);
             },
@@ -631,7 +866,12 @@ class _StepFour extends StatelessWidget {
           child: Text(
             'Price Range',
             style: TextStyle(
-              fontSize: DeviceResponsive.sp(context, 14, minScale: 0.92, maxScale: 1.14),
+              fontSize: DeviceResponsive.sp(
+                context,
+                14,
+                minScale: 0.92,
+                maxScale: 1.14,
+              ),
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -648,24 +888,40 @@ class _StepFour extends StatelessWidget {
               'Rs.${controller.priceRange.value.start.toInt()}',
               'Rs.${controller.priceRange.value.end.toInt()}',
             ),
-            onChanged: (RangeValues values) => controller.priceRange.value = values,
+            onChanged: (RangeValues values) =>
+                controller.priceRange.value = values,
           ),
         ),
         Obx(
           () => Row(
             children: <Widget>[
-              Expanded(child: _ValueChip(text: 'Rs.${controller.priceRange.value.start.toInt()}')),
+              Expanded(
+                child: _ValueChip(
+                  text: 'Rs.${controller.priceRange.value.start.toInt()}',
+                ),
+              ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: DeviceResponsive.w(context, 8)),
+                padding: EdgeInsets.symmetric(
+                  horizontal: DeviceResponsive.w(context, 8),
+                ),
                 child: Text(
                   '-',
                   style: TextStyle(
-                    fontSize: DeviceResponsive.sp(context, 22, minScale: 0.92, maxScale: 1.14),
+                    fontSize: DeviceResponsive.sp(
+                      context,
+                      22,
+                      minScale: 0.92,
+                      maxScale: 1.14,
+                    ),
                     color: AppColors.textSecondary,
                   ),
                 ),
               ),
-              Expanded(child: _ValueChip(text: 'Rs.${controller.priceRange.value.end.toInt()}')),
+              Expanded(
+                child: _ValueChip(
+                  text: 'Rs.${controller.priceRange.value.end.toInt()}',
+                ),
+              ),
             ],
           ),
         ),
@@ -681,8 +937,8 @@ class _StepFour extends StatelessWidget {
   }
 }
 
-class _StepFive extends StatelessWidget {
-  const _StepFive({required this.controller});
+class _LastStepShop extends StatelessWidget {
+  const _LastStepShop({required this.controller});
 
   final VendorOnboardingController controller;
 
@@ -706,7 +962,8 @@ class _StepFive extends StatelessWidget {
             hint: 'Select cleaning buffer days (eg: 1 day)',
             value: controller.selectedCleaningBuffer.value,
             items: controller.cleaningBufferOptions,
-            onChanged: (String? value) => controller.selectedCleaningBuffer.value = value,
+            onChanged: (String? value) =>
+                controller.selectedCleaningBuffer.value = value,
           ),
         ),
         Obx(
@@ -715,7 +972,8 @@ class _StepFive extends StatelessWidget {
             subtitle:
                 'Enable customers to rent outfits directly with doorstep delivery and return without visiting your store.',
             value: controller.isHomeDeliveryAvailable.value,
-            onChanged: (bool value) => controller.isHomeDeliveryAvailable.value = value,
+            onChanged: (bool value) =>
+                controller.isHomeDeliveryAvailable.value = value,
           ),
         ),
         Obx(
@@ -724,7 +982,8 @@ class _StepFive extends StatelessWidget {
             subtitle:
                 'Offer minor fitting adjustments to ensure the outfit fits the customer perfectly before delivery or pickup.',
             value: controller.isAlterationSupportAvailable.value,
-            onChanged: (bool value) => controller.isAlterationSupportAvailable.value = value,
+            onChanged: (bool value) =>
+                controller.isAlterationSupportAvailable.value = value,
           ),
         ),
         SizedBox(height: DeviceResponsive.h(context, 8)),
@@ -734,7 +993,12 @@ class _StepFive extends StatelessWidget {
             'Agreements & Submission',
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: DeviceResponsive.sp(context, 20, minScale: 0.92, maxScale: 1.14),
+              fontSize: DeviceResponsive.sp(
+                context,
+                20,
+                minScale: 0.92,
+                maxScale: 1.14,
+              ),
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -745,47 +1009,66 @@ class _StepFive extends StatelessWidget {
             title: 'Accept Terms & Conditions',
             subtitle:
                 'Confirm that you agree to follow all platform rules, guidelines, and operational standards set by OnesOff.',
-            value: controller.acceptTerms.value,
-            onChanged: (bool value) => controller.acceptTerms.value = value,
+            value: controller.acceptTermsAndConditions.value,
+            onChanged: (bool value) =>
+                controller.acceptTermsAndConditions.value = value,
           ),
         ),
-        Obx(
-          () => _ToggleInfoCard(
-            title: 'Accept Rental & Return Policy',
-            subtitle:
-                'Acknowledge and accept the platform\'s rental duration, cancellation, return timelines, and refund policies.',
-            value: controller.acceptPolicy.value,
-            onChanged: (bool value) => controller.acceptPolicy.value = value,
-          ),
-        ),
-        Obx(
-          () => _ToggleInfoCard(
-            title: 'Accept Escrow Payment Terms',
-            subtitle:
-                'Agree that payments and security deposits will be securely held and released after successful order completion.',
-            value: controller.acceptEscrowTerms.value,
-            onChanged: (bool value) => controller.acceptEscrowTerms.value = value,
-          ),
-        ),
+        // Obx(
+        //   () => _ToggleInfoCard(
+        //     title: 'Accept Rental & Return Policy',
+        //     subtitle:
+        //         'Acknowledge and accept the platform\'s rental duration, cancellation, return timelines, and refund policies.',
+        //     value: controller.acceptPolicy.value,
+        //     onChanged: (bool value) => controller.acceptPolicy.value = value,
+        //   ),
+        // ),
+        // Obx(
+        //   () => _ToggleInfoCard(
+        //     title: 'Accept Escrow Payment Terms',
+        //     subtitle:
+        //         'Agree that payments and security deposits will be securely held and released after successful order completion.',
+        //     value: controller.acceptEscrowTerms.value,
+        //     onChanged: (bool value) =>
+        //         controller.acceptEscrowTerms.value = value,
+        //   ),
+        // ),
         Container(
           width: double.infinity,
           margin: EdgeInsets.only(bottom: DeviceResponsive.h(context, 4)),
           padding: EdgeInsets.all(DeviceResponsive.r(context, 10)),
           decoration: BoxDecoration(
             border: Border.all(color: AppColors.primary.withValues(alpha: 0.6)),
-            borderRadius: BorderRadius.circular(DeviceResponsive.r(context, 10)),
+            borderRadius: BorderRadius.circular(
+              DeviceResponsive.r(context, 10),
+            ),
           ),
           child: Text(
             'Security deposits are automatically calculated based on rental price and held in escrow. Any damage or late fees are deducted, and the remaining amount is refunded after order completion.',
             style: TextStyle(
               color: AppColors.textSecondary,
-              fontSize: DeviceResponsive.sp(context, 15, minScale: 0.92, maxScale: 1.12),
+              fontSize: DeviceResponsive.sp(
+                context,
+                15,
+                minScale: 0.92,
+                maxScale: 1.12,
+              ),
               height: 1.45,
             ),
           ),
         ),
       ],
     );
+  }
+}
+
+class _LastStepIndividual extends StatelessWidget {
+  final VendorOnboardingController controller;
+  const _LastStepIndividual({super.key, required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
 
@@ -821,7 +1104,12 @@ class _FormTextField extends StatelessWidget {
               child: Text(
                 label,
                 style: TextStyle(
-                  fontSize: DeviceResponsive.sp(context, 14, minScale: 0.92, maxScale: 1.14),
+                  fontSize: DeviceResponsive.sp(
+                    context,
+                    14,
+                    minScale: 0.92,
+                    maxScale: 1.14,
+                  ),
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -831,20 +1119,36 @@ class _FormTextField extends StatelessWidget {
             maxLines: maxLines,
             keyboardType: keyboardType,
             inputFormatters: inputFormatters,
-            style: TextStyle(fontSize: DeviceResponsive.sp(context, 12, minScale: 0.92, maxScale: 1.14)),
+            style: TextStyle(
+              fontSize: DeviceResponsive.sp(
+                context,
+                12,
+                minScale: 0.92,
+                maxScale: 1.14,
+              ),
+            ),
             decoration: InputDecoration(
               hintText: hint,
-              prefixIcon: prefixIcon == null ? null : Icon(prefixIcon, color: AppColors.textSecondary),
+              prefixIcon: prefixIcon == null
+                  ? null
+                  : Icon(prefixIcon, color: AppColors.textSecondary),
               hintStyle: TextStyle(
                 color: AppColors.textSecondary,
-                fontSize: DeviceResponsive.sp(context, 12, minScale: 0.92, maxScale: 1.12),
+                fontSize: DeviceResponsive.sp(
+                  context,
+                  12,
+                  minScale: 0.92,
+                  maxScale: 1.12,
+                ),
               ),
               contentPadding: EdgeInsets.symmetric(
                 horizontal: DeviceResponsive.w(context, 12),
                 vertical: DeviceResponsive.h(context, 14),
               ),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(DeviceResponsive.r(context, 12)),
+                borderRadius: BorderRadius.circular(
+                  DeviceResponsive.r(context, 12),
+                ),
               ),
             ),
           ),
@@ -881,7 +1185,12 @@ class _FormDropdown extends StatelessWidget {
             child: Text(
               label,
               style: TextStyle(
-                fontSize: DeviceResponsive.sp(context, 14, minScale: 0.92, maxScale: 1.14),
+                fontSize: DeviceResponsive.sp(
+                  context,
+                  14,
+                  minScale: 0.92,
+                  maxScale: 1.14,
+                ),
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -889,7 +1198,15 @@ class _FormDropdown extends StatelessWidget {
           DropdownButtonFormField<String>(
             value: value == null || value!.isEmpty ? null : value,
             isExpanded: true,
-            style: TextStyle(fontSize: DeviceResponsive.sp(context, 12, minScale: 0.92, maxScale: 1.12), color: AppColors.textSecondary),
+            style: TextStyle(
+              fontSize: DeviceResponsive.sp(
+                context,
+                12,
+                minScale: 0.92,
+                maxScale: 1.12,
+              ),
+              color: AppColors.textSecondary,
+            ),
             items: items
                 .map(
                   (String item) => DropdownMenuItem<String>(
@@ -898,7 +1215,12 @@ class _FormDropdown extends StatelessWidget {
                       item,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        fontSize: DeviceResponsive.sp(context, 12, minScale: 0.92, maxScale: 1.12),
+                        fontSize: DeviceResponsive.sp(
+                          context,
+                          12,
+                          minScale: 0.92,
+                          maxScale: 1.12,
+                        ),
                       ),
                     ),
                   ),
@@ -910,14 +1232,21 @@ class _FormDropdown extends StatelessWidget {
               hintText: hint,
               hintStyle: TextStyle(
                 color: AppColors.textSecondary,
-                fontSize: DeviceResponsive.sp(context, 12, minScale: 0.92, maxScale: 1.12),
+                fontSize: DeviceResponsive.sp(
+                  context,
+                  12,
+                  minScale: 0.92,
+                  maxScale: 1.12,
+                ),
               ),
               contentPadding: EdgeInsets.symmetric(
                 horizontal: DeviceResponsive.w(context, 12),
                 vertical: DeviceResponsive.h(context, 14),
               ),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(DeviceResponsive.r(context, 12)),
+                borderRadius: BorderRadius.circular(
+                  DeviceResponsive.r(context, 12),
+                ),
               ),
             ),
           ),
@@ -944,8 +1273,9 @@ class _SingleSelectField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String displayValue =
-        value == null || value!.trim().isEmpty ? hint : value!.trim();
+    final String displayValue = value == null || value!.trim().isEmpty
+        ? hint
+        : value!.trim();
     return Padding(
       padding: EdgeInsets.only(bottom: DeviceResponsive.h(context, 10)),
       child: Column(
@@ -968,7 +1298,9 @@ class _SingleSelectField extends StatelessWidget {
           ),
           InkWell(
             onTap: enabled ? onTap : null,
-            borderRadius: BorderRadius.circular(DeviceResponsive.r(context, 12)),
+            borderRadius: BorderRadius.circular(
+              DeviceResponsive.r(context, 12),
+            ),
             child: Container(
               width: double.infinity,
               padding: EdgeInsets.symmetric(
@@ -976,7 +1308,9 @@ class _SingleSelectField extends StatelessWidget {
                 vertical: DeviceResponsive.h(context, 14),
               ),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(DeviceResponsive.r(context, 12)),
+                borderRadius: BorderRadius.circular(
+                  DeviceResponsive.r(context, 12),
+                ),
                 border: Border.all(color: const Color(0xFF7C8591)),
                 color: enabled ? null : const Color(0xFFF0F1F3),
               ),
@@ -1002,7 +1336,9 @@ class _SingleSelectField extends StatelessWidget {
                   ),
                   Icon(
                     Icons.keyboard_arrow_down_rounded,
-                    color: enabled ? AppColors.textSecondary : const Color(0xFFABB0B8),
+                    color: enabled
+                        ? AppColors.textSecondary
+                        : const Color(0xFFABB0B8),
                   ),
                 ],
               ),
@@ -1040,14 +1376,21 @@ class _MultiSelectField extends StatelessWidget {
             child: Text(
               label,
               style: TextStyle(
-                fontSize: DeviceResponsive.sp(context, 14, minScale: 0.92, maxScale: 1.14),
+                fontSize: DeviceResponsive.sp(
+                  context,
+                  14,
+                  minScale: 0.92,
+                  maxScale: 1.14,
+                ),
                 fontWeight: FontWeight.w500,
               ),
             ),
           ),
           InkWell(
             onTap: onTap,
-            borderRadius: BorderRadius.circular(DeviceResponsive.r(context, 12)),
+            borderRadius: BorderRadius.circular(
+              DeviceResponsive.r(context, 12),
+            ),
             child: Container(
               width: double.infinity,
               padding: EdgeInsets.symmetric(
@@ -1055,7 +1398,9 @@ class _MultiSelectField extends StatelessWidget {
                 vertical: DeviceResponsive.h(context, 14),
               ),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(DeviceResponsive.r(context, 12)),
+                borderRadius: BorderRadius.circular(
+                  DeviceResponsive.r(context, 12),
+                ),
                 border: Border.all(color: const Color(0xFF7C8591)),
               ),
               child: Row(
@@ -1066,12 +1411,22 @@ class _MultiSelectField extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        color: values.isEmpty ? AppColors.textSecondary : AppColors.onSurface,
-                        fontSize: DeviceResponsive.sp(context, 12, minScale: 0.92, maxScale: 1.12),
+                        color: values.isEmpty
+                            ? AppColors.textSecondary
+                            : AppColors.onSurface,
+                        fontSize: DeviceResponsive.sp(
+                          context,
+                          12,
+                          minScale: 0.92,
+                          maxScale: 1.12,
+                        ),
                       ),
                     ),
                   ),
-                  const Icon(Icons.keyboard_arrow_down_rounded, color: AppColors.textSecondary),
+                  const Icon(
+                    Icons.keyboard_arrow_down_rounded,
+                    color: AppColors.textSecondary,
+                  ),
                 ],
               ),
             ),
@@ -1104,13 +1459,23 @@ class _TimeSelectorField extends StatelessWidget {
             controller: controller,
             readOnly: true,
             style: TextStyle(
-              fontSize: DeviceResponsive.sp(context, 12, minScale: 0.92, maxScale: 1.14),
+              fontSize: DeviceResponsive.sp(
+                context,
+                12,
+                minScale: 0.92,
+                maxScale: 1.14,
+              ),
             ),
             decoration: InputDecoration(
               hintText: hint,
               hintStyle: TextStyle(
                 color: AppColors.textSecondary,
-                fontSize: DeviceResponsive.sp(context, 12, minScale: 0.92, maxScale: 1.12),
+                fontSize: DeviceResponsive.sp(
+                  context,
+                  12,
+                  minScale: 0.92,
+                  maxScale: 1.12,
+                ),
               ),
               prefixIcon: Icon(
                 Icons.schedule_outlined,
@@ -1122,7 +1487,9 @@ class _TimeSelectorField extends StatelessWidget {
                 vertical: DeviceResponsive.h(context, 14),
               ),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(DeviceResponsive.r(context, 12)),
+                borderRadius: BorderRadius.circular(
+                  DeviceResponsive.r(context, 12),
+                ),
               ),
             ),
           ),
@@ -1157,7 +1524,12 @@ class _UploadPickerField extends StatelessWidget {
             child: Text(
               label,
               style: TextStyle(
-                fontSize: DeviceResponsive.sp(context, 14, minScale: 0.92, maxScale: 1.14),
+                fontSize: DeviceResponsive.sp(
+                  context,
+                  14,
+                  minScale: 0.92,
+                  maxScale: 1.14,
+                ),
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -1169,24 +1541,37 @@ class _UploadPickerField extends StatelessWidget {
               strokeColor: const Color(0xFF9DA2AA),
               child: Container(
                 width: double.infinity,
-                padding: EdgeInsets.symmetric(vertical: DeviceResponsive.h(context, 20)),
+                padding: EdgeInsets.symmetric(
+                  vertical: DeviceResponsive.h(context, 20),
+                ),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(DeviceResponsive.r(context, 12)),
+                  borderRadius: BorderRadius.circular(
+                    DeviceResponsive.r(context, 12),
+                  ),
                 ),
                 child: Column(
                   children: <Widget>[
                     Icon(
                       Icons.upload_rounded,
-                      color: hasSelection ? AppColors.primary : AppColors.textSecondary,
+                      color: hasSelection
+                          ? AppColors.primary
+                          : AppColors.textSecondary,
                       size: DeviceResponsive.r(context, 24),
                     ),
                     SizedBox(height: DeviceResponsive.h(context, 6)),
                     Text(
                       hasSelection ? 'Selected File' : 'Tap to upload',
                       style: TextStyle(
-                        fontSize: DeviceResponsive.sp(context, 14, minScale: 0.92, maxScale: 1.12),
+                        fontSize: DeviceResponsive.sp(
+                          context,
+                          14,
+                          minScale: 0.92,
+                          maxScale: 1.12,
+                        ),
                         fontWeight: FontWeight.w600,
-                        color: hasSelection ? AppColors.primary : AppColors.onSurface,
+                        color: hasSelection
+                            ? AppColors.primary
+                            : AppColors.onSurface,
                       ),
                     ),
                     SizedBox(height: DeviceResponsive.h(context, 2)),
@@ -1199,7 +1584,12 @@ class _UploadPickerField extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: AppColors.textSecondary,
-                        fontSize: DeviceResponsive.sp(context, 12, minScale: 0.92, maxScale: 1.1),
+                        fontSize: DeviceResponsive.sp(
+                          context,
+                          12,
+                          minScale: 0.92,
+                          maxScale: 1.1,
+                        ),
                         height: 1.3,
                       ),
                     ),
@@ -1315,7 +1705,12 @@ class _ToggleInfoCard extends StatelessWidget {
                 Text(
                   title,
                   style: TextStyle(
-                    fontSize: DeviceResponsive.sp(context, 14, minScale: 0.92, maxScale: 1.14),
+                    fontSize: DeviceResponsive.sp(
+                      context,
+                      14,
+                      minScale: 0.92,
+                      maxScale: 1.14,
+                    ),
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -1324,7 +1719,12 @@ class _ToggleInfoCard extends StatelessWidget {
                   subtitle,
                   style: TextStyle(
                     color: AppColors.textSecondary,
-                    fontSize: DeviceResponsive.sp(context, 12, minScale: 0.92, maxScale: 1.12),
+                    fontSize: DeviceResponsive.sp(
+                      context,
+                      12,
+                      minScale: 0.92,
+                      maxScale: 1.12,
+                    ),
                     height: 1.45,
                   ),
                 ),
@@ -1353,7 +1753,9 @@ class _ValueChip extends StatelessWidget {
     return Container(
       height: DeviceResponsive.h(context, 48),
       alignment: Alignment.centerLeft,
-      padding: EdgeInsets.symmetric(horizontal: DeviceResponsive.w(context, 14)),
+      padding: EdgeInsets.symmetric(
+        horizontal: DeviceResponsive.w(context, 14),
+      ),
       decoration: BoxDecoration(
         border: Border.all(color: const Color(0xFF9A9FA8)),
         borderRadius: BorderRadius.circular(DeviceResponsive.r(context, 20)),
@@ -1362,7 +1764,12 @@ class _ValueChip extends StatelessWidget {
         text,
         style: TextStyle(
           color: AppColors.textSecondary,
-          fontSize: DeviceResponsive.sp(context, 16, minScale: 0.92, maxScale: 1.12),
+          fontSize: DeviceResponsive.sp(
+            context,
+            16,
+            minScale: 0.92,
+            maxScale: 1.12,
+          ),
         ),
       ),
     );

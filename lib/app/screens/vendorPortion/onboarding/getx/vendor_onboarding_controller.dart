@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';
+import 'package:onesoff/app/utils/deviceConstants/appStrings.dart';
 
 import '../../../../controllers/app_session_controller.dart';
 import '../../../../routes/appRoutes.dart';
@@ -82,7 +83,6 @@ class VendorOnboardingController extends GetxController {
   final RxBool isOwnershipDeclared = false.obs;
 
   //step 4 and step 5
-
   final RxBool acceptTermsAndConditions = false.obs;
   final RxBool acceptCommissionAgreement = false.obs;
   final RxBool acceptCancellationPolicy = false.obs;
@@ -99,37 +99,18 @@ class VendorOnboardingController extends GetxController {
 
   final RxMap<String, String> selectedFiles = <String, String>{}.obs;
 
+  //step 1
   List<String> get accountTypeOptions => const <String>[
     'Shop Owner',
     'Individual Owner',
   ];
 
-  List<String> get businessTypeOptions => const <String>[
-    'Sole Proprietor',
-    'Partnership',
-    'Pvt Ltd',
-    'Individual',
-  ];
+  bool get isShopOwner => selectedAccountType.value == 'Shop Owner';
+  bool get isIndividualOwner => selectedAccountType.value == 'Individual Owner';
 
-  List<String> get storeTypeOptions => const <String>[
-    'Physical Store',
-    'Home-based',
-    'Both',
-  ];
+  int get totalSteps => isShopOwner ? 5 : 4;
 
-  List<String> get cleaningBufferOptions => const <String>[
-    '1 day',
-    '2 days',
-    '3 days',
-  ];
-
-  List<String> get defaultRentalDurationOptions => const <String>[
-    '3 days',
-    '5 days',
-    '7 days',
-    '10 days',
-  ];
-
+  //step 2
   Map<String, List<String>> get stateCityMap => const <String, List<String>>{
     'Maharashtra': <String>['Mumbai', 'Pune', 'Nagpur', 'Nashik'],
     'Delhi': <String>['New Delhi', 'Dwarka', 'Rohini'],
@@ -152,6 +133,12 @@ class VendorOnboardingController extends GetxController {
     );
   }
 
+  List<String> get storeTypeOptions => const <String>[
+    'Physical Store',
+    'Home-based',
+    'Both',
+  ];
+
   List<String> get workingDayOptions => const <String>[
     'Monday',
     'Tuesday',
@@ -162,6 +149,29 @@ class VendorOnboardingController extends GetxController {
     'Sunday',
   ];
 
+  //TODO: set year
+  List<String> get workingExperienceOptions => <String>[
+    "Less than 1 year",
+    "1 to 5 year",
+    "5 to 10 year",
+    "10 and above year",
+  ];
+
+  List<String> get pickupMethodOptions => <String>["sell", "drop"];
+
+  //step 3
+  List<String> get businessTypeOptions => const <String>[
+    'Sole Proprietor',
+    'Partnership',
+    'Pvt Ltd',
+    'Individual',
+    'Rent Agreement',
+  ];
+
+  bool get isBusinessTypeRentAgreement =>
+      selectedBusinessType.value == "Rent Agreement";
+
+  //step 4
   List<String> get primaryCategoryOptions => const <String>[
     'Lehenga',
     'Saree',
@@ -190,6 +200,20 @@ class VendorOnboardingController extends GetxController {
     '4XL',
     '5XL',
     '6XL',
+  ];
+
+  //last step (4 and 5)
+  List<String> get cleaningBufferOptions => const <String>[
+    '1 day',
+    '2 days',
+    '3 days',
+  ];
+
+  List<String> get defaultRentalDurationOptions => const <String>[
+    '3 days',
+    '5 days',
+    '7 days',
+    '10 days',
   ];
 
   void updateState(String? state) {
@@ -233,7 +257,7 @@ class VendorOnboardingController extends GetxController {
   }
 
   void nextStep() {
-    if (currentStep.value < 4) {
+    if (currentStep.value < totalSteps - 1) {
       currentStep.value = currentStep.value + 1;
       return;
     }
@@ -253,25 +277,55 @@ class VendorOnboardingController extends GetxController {
     Get.offAllNamed(AppRoutes.vendorDashboard);
   }
 
+  List<(String, String)> get stepInfo {
+    final info = [
+      (AppStrings.stepOneHeading, AppStrings.stepOneSubHeading),
+      (AppStrings.stepTwoHeading, AppStrings.stepTwoSubHeading),
+      (AppStrings.stepThreeHeading, AppStrings.stepThreeSubHeading),
+    ];
+
+    if (isShopOwner) {
+      info.add((AppStrings.stepFourHeading, AppStrings.stepFourSubHeading));
+    }
+
+    info.add((AppStrings.stepFiveHeading, AppStrings.stepFiveSubHeading));
+
+    return info;
+  }
+
   @override
   void onClose() {
-    shopNameController.dispose();
+    // Step 1
+    phoneNumberContoller.dispose();
     ownerNameController.dispose();
-    shortBrandDescriptionController.dispose();
     emailController.dispose();
-    shopAddressController.dispose();
-    pinCodeController.dispose();
+    shortBrandDescriptionController.dispose();
+
+    // Step 2
+    shopNameController.dispose();
     googleBusinessProfileController.dispose();
+    gstController.dispose();
+    occupationController.dispose();
+    pinCodeController.dispose();
+    shopAddressController.dispose();
     startTimeController.dispose();
     endTimeController.dispose();
-    panCardController.dispose();
+
+    // Step 3
     aadhaarController.dispose();
-    gstController.dispose();
+    accountNumberController.dispose();
     bankAccountHolderController.dispose();
     bankNameController.dispose();
-    accountNumberController.dispose();
+    bankBranchController.dispose();
     ifscController.dispose();
+    upiController.dispose();
+
+    // Step 4
     inventoryVolumeController.dispose();
+
+    // Optional / unused
+    panCardController.dispose();
+
     super.onClose();
   }
 }
