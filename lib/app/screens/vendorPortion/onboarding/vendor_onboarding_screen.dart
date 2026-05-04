@@ -23,6 +23,7 @@ class VendorOnboardingScreen extends GetView<VendorOnboardingController> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                //header 
                 Padding(
                   padding: EdgeInsets.fromLTRB(
                     DeviceResponsive.w(context, 16),
@@ -63,7 +64,10 @@ class VendorOnboardingScreen extends GetView<VendorOnboardingController> {
                     ),
                   ),
                 ),
+
                 SizedBox(height: DeviceResponsive.h(context, 12)),
+
+                //body
                 Expanded(
                   child: SingleChildScrollView(
                     keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
