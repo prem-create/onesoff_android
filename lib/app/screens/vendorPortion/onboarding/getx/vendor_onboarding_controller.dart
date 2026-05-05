@@ -45,8 +45,6 @@ class VendorOnboardingController extends GetxController {
       TextEditingController();
   final Rx<RangeValues> priceRange = const RangeValues(0, 500).obs;
 
-  //TODO: not used in Figma design
-  final TextEditingController panCardController = TextEditingController();
 
   //step 1
   final RxnString selectedAccountType = RxnString();
@@ -170,6 +168,8 @@ class VendorOnboardingController extends GetxController {
 
   bool get isBusinessTypeRentAgreement =>
       selectedBusinessType.value == "Rent Agreement";
+
+  String get rentAgreementType => businessTypeOptions[4];
 
   //step 4
   List<String> get primaryCategoryOptions => const <String>[
@@ -323,8 +323,6 @@ class VendorOnboardingController extends GetxController {
     // Step 4
     inventoryVolumeController.dispose();
 
-    // Optional / unused
-    panCardController.dispose();
 
     super.onClose();
   }

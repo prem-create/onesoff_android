@@ -281,18 +281,14 @@ class _StepBody extends StatelessWidget {
       controller.isShopOwner
           ? _StepTwoShop(controller: controller)
           : _StepTwoIndividual(controller: controller),
-      controller.isShopOwner
-          ? _StepThreeShop(controller: controller)
-          : _StepThreeIndividual(controller: controller),
+      _StepThreeCommon(controller: controller),
     ];
 
     if (controller.isShopOwner) {
       steps.add(_StepFourShop(controller: controller));
     }
 
-    controller.isShopOwner
-        ? steps.add(_LastStepShop(controller: controller))
-        : steps.add(_LastStepIndividual(controller: controller));
+    steps.add(_LastStepCommon(controller: controller));
 
     return steps;
   }
@@ -674,8 +670,8 @@ class _StepTwoIndividual extends StatelessWidget {
   }
 }
 
-class _StepThreeShop extends StatelessWidget {
-  const _StepThreeShop({required this.controller});
+class _StepThreeCommon extends StatelessWidget {
+  const _StepThreeCommon({required this.controller});
 
   final VendorOnboardingController controller;
 
@@ -735,41 +731,41 @@ class _StepThreeShop extends StatelessWidget {
           hint: 'Enter UPI id',
           controller: controller.upiController,
         ),
-        Obx(
-          () => _FormDropdown(
-            label: "Business Proof type",
-            hint: "Select business proof type",
-            value: controller.selectedBusinessType.value,
-            items: controller.businessTypeOptions,
-            onChanged: (value) => controller.selectedBusinessType.value = value,
-          ),
-        ),
-
-        if (controller.isBusinessTypeRentAgreement)
+        if (controller.isShopOwner)
+          Obx(
+            () => _FormDropdown(
+              label: "Business Proof type",
+              hint: "Select business proof type",
+              value: controller.selectedBusinessType.value,
+              items: controller.businessTypeOptions,
+              onChanged: (value) =>
+                  controller.selectedBusinessType.value = value,
+            ),
+          )
+        else
           Obx(() {
-            controller.selectedBusinessType.value;
-            if (controller.isBusinessTypeRentAgreement) {
-              return _UploadPickerField(
-                label: "Upload Rent agreement",
-                selectedFileName: controller.selectedFiles["rent_agreement"],
-                onTap: () => controller.pickFile("rent_agreement"),
-              );
-            }
-            return const SizedBox.shrink();
+            return _ToggleInfoCard(
+              title: "Ownership Declaration",
+              subtitle:
+                  "I confirm that the uploaded outfits belong to me and I have the right to list them on Ones Off.",
+              value: controller.isOwnershipDeclared.value,
+              onChanged: (value) =>
+                  controller.isOwnershipDeclared.value = value,
+            );
           }),
-          
+
+        Obx(() {
+          if (controller.isBusinessTypeRentAgreement) {
+            return _UploadPickerField(
+              label: "Upload Rent agreement",
+              selectedFileName: controller.selectedFiles["rent_agreement"],
+              onTap: () => controller.pickFile("rent_agreement"),
+            );
+          }
+          return const SizedBox.shrink();
+        }),
       ],
     );
-  }
-}
-
-class _StepThreeIndividual extends StatelessWidget {
-  final VendorOnboardingController controller;
-  const _StepThreeIndividual({super.key, required this.controller});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }
 
@@ -937,11 +933,13 @@ class _StepFourShop extends StatelessWidget {
   }
 }
 
-class _LastStepShop extends StatelessWidget {
-  const _LastStepShop({required this.controller});
+class _LastStepCommon extends StatelessWidget {
+  const _LastStepCommon({required this.controller});
 
   final VendorOnboardingController controller;
-
+  //TODO: subtitle is common in figma design so making a dummy variable later update as per design
+  final String commonSubtitle =
+      "Enable customers to rent outfits directly with doorstep delivery and return without visiting your store.";
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -966,31 +964,91 @@ class _LastStepShop extends StatelessWidget {
                 controller.selectedCleaningBuffer.value = value,
           ),
         ),
-        Obx(
-          () => _ToggleInfoCard(
-            title: 'Home Delivery Availability',
-            subtitle:
-                'Enable customers to rent outfits directly with doorstep delivery and return without visiting your store.',
-            value: controller.isHomeDeliveryAvailable.value,
-            onChanged: (bool value) =>
-                controller.isHomeDeliveryAvailable.value = value,
+        Align(
+          alignment: Alignment.center,
+          child: Text(
+            'Platform Terms',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: DeviceResponsive.sp(
+                context,
+                20,
+                minScale: 0.92,
+                maxScale: 1.14,
+              ),
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
         Obx(
           () => _ToggleInfoCard(
-            title: 'Alteration support available?',
-            subtitle:
-                'Offer minor fitting adjustments to ensure the outfit fits the customer perfectly before delivery or pickup.',
-            value: controller.isAlterationSupportAvailable.value,
+            title: 'Platform Terms & Conditions',
+            subtitle: commonSubtitle,
+            value: controller.acceptTermsAndConditions.value,
             onChanged: (bool value) =>
-                controller.isAlterationSupportAvailable.value = value,
+                controller.acceptTermsAndConditions.value = value,
+            readTermsText: "Read platform terms & condition",
+            readTermsVoidCallBack: () {},
           ),
         ),
+        Obx(
+          () => _ToggleInfoCard(
+            title: 'Commission Agreement',
+            subtitle: commonSubtitle,
+            value: controller.acceptCommissionAgreement.value,
+            onChanged: (bool value) =>
+                controller.acceptCommissionAgreement.value = value,
+            readTermsText: "Read commission agreement",
+            readTermsVoidCallBack: () {},
+          ),
+        ),
+        Obx(
+          () => _ToggleInfoCard(
+            title: 'Cancellation Policy',
+            subtitle: commonSubtitle,
+            value: controller.acceptCancellationPolicy.value,
+            onChanged: (bool value) =>
+                controller.acceptCancellationPolicy.value = value,
+            readTermsText: "Read platform terms & condition",
+            readTermsVoidCallBack: () {},
+          ),
+        ),
+        Obx(
+          () => _ToggleInfoCard(
+            title: 'Deposit Rules',
+            subtitle: commonSubtitle,
+            value: controller.acceptDepositRules.value,
+            onChanged: (bool value) =>
+                controller.acceptDepositRules.value = value,
+            readTermsText: "Read deposit Rules",
+            readTermsVoidCallBack: () {},
+          ),
+        ),
+
+        controller.isShopOwner
+            ? _ShopOwnerAgreements(controller: controller)
+            : _IndividualOwnerAgreement(controller: controller),
+      ],
+    );
+  }
+}
+
+class _ShopOwnerAgreements extends StatelessWidget {
+  final VendorOnboardingController controller;
+  //TODO: subtitle is common in figma design so making a dummy variable later update as per design
+  final String commonSubtitle =
+      "Enable customers to rent outfits directly with doorstep delivery and return without visiting your store.";
+  const _ShopOwnerAgreements({super.key, required this.controller});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
         SizedBox(height: DeviceResponsive.h(context, 8)),
         Align(
           alignment: Alignment.center,
           child: Text(
-            'Agreements & Submission',
+            'Shop Owner Agreements',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: DeviceResponsive.sp(
@@ -1006,55 +1064,35 @@ class _LastStepShop extends StatelessWidget {
         SizedBox(height: DeviceResponsive.h(context, 8)),
         Obx(
           () => _ToggleInfoCard(
-            title: 'Accept Terms & Conditions',
-            subtitle:
-                'Confirm that you agree to follow all platform rules, guidelines, and operational standards set by OnesOff.',
-            value: controller.acceptTermsAndConditions.value,
+            title: 'Order handling responsibility rules',
+            subtitle: commonSubtitle,
+            value: controller.acceptOrderHandlingRules.value,
             onChanged: (bool value) =>
-                controller.acceptTermsAndConditions.value = value,
+                controller.acceptOrderHandlingRules.value = value,
+            readTermsText: "Read Order handling responsibility rules",
+            readTermsVoidCallBack: () {},
           ),
         ),
-        // Obx(
-        //   () => _ToggleInfoCard(
-        //     title: 'Accept Rental & Return Policy',
-        //     subtitle:
-        //         'Acknowledge and accept the platform\'s rental duration, cancellation, return timelines, and refund policies.',
-        //     value: controller.acceptPolicy.value,
-        //     onChanged: (bool value) => controller.acceptPolicy.value = value,
-        //   ),
-        // ),
-        // Obx(
-        //   () => _ToggleInfoCard(
-        //     title: 'Accept Escrow Payment Terms',
-        //     subtitle:
-        //         'Agree that payments and security deposits will be securely held and released after successful order completion.',
-        //     value: controller.acceptEscrowTerms.value,
-        //     onChanged: (bool value) =>
-        //         controller.acceptEscrowTerms.value = value,
-        //   ),
-        // ),
-        Container(
-          width: double.infinity,
-          margin: EdgeInsets.only(bottom: DeviceResponsive.h(context, 4)),
-          padding: EdgeInsets.all(DeviceResponsive.r(context, 10)),
-          decoration: BoxDecoration(
-            border: Border.all(color: AppColors.primary.withValues(alpha: 0.6)),
-            borderRadius: BorderRadius.circular(
-              DeviceResponsive.r(context, 10),
-            ),
+        Obx(
+          () => _ToggleInfoCard(
+            title: 'Quality standards rules',
+            subtitle: commonSubtitle,
+            value: controller.acceptQualityStandards.value,
+            onChanged: (bool value) =>
+                controller.acceptQualityStandards.value = value,
+            readTermsText: "Read Quality standards rules",
+            readTermsVoidCallBack: () {},
           ),
-          child: Text(
-            'Security deposits are automatically calculated based on rental price and held in escrow. Any damage or late fees are deducted, and the remaining amount is refunded after order completion.',
-            style: TextStyle(
-              color: AppColors.textSecondary,
-              fontSize: DeviceResponsive.sp(
-                context,
-                15,
-                minScale: 0.92,
-                maxScale: 1.12,
-              ),
-              height: 1.45,
-            ),
+        ),
+        Obx(
+          () => _ToggleInfoCard(
+            title: 'Return handling rules',
+            subtitle: commonSubtitle,
+            value: controller.acceptReturnHandlingRules.value,
+            onChanged: (bool value) =>
+                controller.acceptReturnHandlingRules.value = value,
+            readTermsText: "Read Return handling rules",
+            readTermsVoidCallBack: () {},
           ),
         ),
       ],
@@ -1062,13 +1100,81 @@ class _LastStepShop extends StatelessWidget {
   }
 }
 
-class _LastStepIndividual extends StatelessWidget {
+class _IndividualOwnerAgreement extends StatelessWidget {
   final VendorOnboardingController controller;
-  const _LastStepIndividual({super.key, required this.controller});
+  //TODO: subtitle is common in figma design so making a dummy variable later update as per design
+  final String commonSubtitle =
+      "Enable customers to rent outfits directly with doorstep delivery and return without visiting your store.";
+  const _IndividualOwnerAgreement({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Column(
+      children: [
+        SizedBox(height: DeviceResponsive.h(context, 8)),
+        Align(
+          alignment: Alignment.center,
+          child: Text(
+            'Individual Owner Agreements',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: DeviceResponsive.sp(
+                context,
+                20,
+                minScale: 0.92,
+                maxScale: 1.14,
+              ),
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+        SizedBox(height: DeviceResponsive.h(context, 8)),
+        Obx(
+          () => _ToggleInfoCard(
+            title: 'Passive ownership model',
+            subtitle: commonSubtitle,
+            value: controller.acceptPassiveOwnershipModel.value,
+            onChanged: (bool value) =>
+                controller.acceptPassiveOwnershipModel.value = value,
+            readTermsText: "Read Passive ownership model",
+            readTermsVoidCallBack: () {},
+          ),
+        ),
+        Obx(
+          () => _ToggleInfoCard(
+            title: 'Platform pricing control',
+            subtitle: commonSubtitle,
+            value: controller.acceptPlatformPricingControl.value,
+            onChanged: (bool value) =>
+                controller.acceptPlatformPricingControl.value = value,
+            readTermsText: "Read Platform pricing control",
+            readTermsVoidCallBack: () {},
+          ),
+        ),
+        Obx(
+          () => _ToggleInfoCard(
+            title: 'Revenue share',
+            subtitle: commonSubtitle,
+            value: controller.acceptRevenueShare.value,
+            onChanged: (bool value) =>
+                controller.acceptRevenueShare.value = value,
+            readTermsText: "Read revenue share % rules",
+            readTermsVoidCallBack: () {},
+          ),
+        ),
+        Obx(
+          () => _ToggleInfoCard(
+            title: 'Maintenance deduction rules',
+            subtitle: commonSubtitle,
+            value: controller.acceptMaintenanceDeductionRules.value,
+            onChanged: (bool value) =>
+                controller.acceptMaintenanceDeductionRules.value = value,
+            readTermsText: "Read Maintenance deduction rules",
+            readTermsVoidCallBack: () {},
+          ),
+        ),
+      ],
+    );
   }
 }
 
@@ -1679,12 +1785,16 @@ class _ToggleInfoCard extends StatelessWidget {
     required this.subtitle,
     required this.value,
     required this.onChanged,
+    this.readTermsText,
+    this.readTermsVoidCallBack,
   });
 
   final String title;
   final String subtitle;
+  final String? readTermsText;
   final bool value;
   final ValueChanged<bool> onChanged;
+  final VoidCallback? readTermsVoidCallBack;
 
   @override
   Widget build(BuildContext context) {
@@ -1695,48 +1805,81 @@ class _ToggleInfoCard extends StatelessWidget {
         border: Border.all(color: const Color(0xFF8F96A1)),
         borderRadius: BorderRadius.circular(DeviceResponsive.r(context, 12)),
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: DeviceResponsive.sp(
-                      context,
-                      14,
-                      minScale: 0.92,
-                      maxScale: 1.14,
+      child: Column(
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: DeviceResponsive.sp(
+                          context,
+                          14,
+                          minScale: 0.92,
+                          maxScale: 1.14,
+                        ),
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                    fontWeight: FontWeight.w500,
+                    SizedBox(height: DeviceResponsive.h(context, 3)),
+                    Text(
+                      subtitle,
+                      style: TextStyle(
+                        color: AppColors.textSecondary,
+                        fontSize: DeviceResponsive.sp(
+                          context,
+                          12,
+                          minScale: 0.92,
+                          maxScale: 1.12,
+                        ),
+                        height: 1.45,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(width: DeviceResponsive.w(context, 8)),
+              Switch(
+                value: value,
+                onChanged: onChanged,
+                activeColor: AppColors.primary,
+              ),
+            ],
+          ),
+
+          //optional
+          if (readTermsText != null && readTermsVoidCallBack != null)
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: readTermsVoidCallBack!,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.readTermsButton,
+                  foregroundColor: AppColors.textPrimary,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                SizedBox(height: DeviceResponsive.h(context, 3)),
-                Text(
-                  subtitle,
+                child: Text(
+                  readTermsText!,
                   style: TextStyle(
-                    color: AppColors.textSecondary,
                     fontSize: DeviceResponsive.sp(
                       context,
                       12,
                       minScale: 0.92,
-                      maxScale: 1.12,
+                      maxScale: 1.14,
                     ),
-                    height: 1.45,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
-          SizedBox(width: DeviceResponsive.w(context, 8)),
-          Switch(
-            value: value,
-            onChanged: onChanged,
-            activeColor: AppColors.primary,
-          ),
         ],
       ),
     );

@@ -16,6 +16,7 @@ class AppColors {
   static const Color inactiveDot = Color(0xFFD9D9D9);
   static const Color border = Color(0xFF6A2236);
   static const Color shadow = Color(0x2B000000);
+  static const Color readTermsButton = Color(0xFFEEEEEE);
 
   static const Color dashboardSurface = Color(0xFFF2F3F5);
 }
