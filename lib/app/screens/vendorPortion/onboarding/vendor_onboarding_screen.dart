@@ -22,7 +22,6 @@ class VendorOnboardingScreen extends GetView<VendorOnboardingController> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              //header
               Padding(
                 padding: EdgeInsets.fromLTRB(
                   DeviceResponsive.w(context, 16),
@@ -49,7 +48,6 @@ class VendorOnboardingScreen extends GetView<VendorOnboardingController> {
                   horizontal: DeviceResponsive.w(context, 16),
                 ),
                 child: Text(
-                  //TODO: fix Logic UI mismatch in total steps for common screen
                   'Step ${step + 1} of ${controller.totalSteps}',
                   style: TextStyle(
                     color: AppColors.textSecondary,
@@ -81,7 +79,6 @@ class VendorOnboardingScreen extends GetView<VendorOnboardingController> {
 
               SizedBox(height: DeviceResponsive.h(context, 12)),
 
-              //body
               Expanded(
                 child: SingleChildScrollView(
                   keyboardDismissBehavior:
@@ -314,7 +311,7 @@ class _StepOneCommon extends StatelessWidget {
           value: controller.selectedAccountType.value,
           items: controller.accountTypeOptions,
           onChanged: (value) {
-            controller.selectedAccountType.value = value;
+            value != null ? controller.selectedAccountType.value = value : null;
           },
         ),
         _FormTextField(
@@ -435,13 +432,13 @@ class _StepTwoShop extends StatelessWidget {
           ],
         ),
         _FormTextField(
-          label: 'Google Business Profile proof. [optional]',
+          label: 'Google Business Profile Proof [optional]',
           hint: 'Share google business profile link',
           controller: controller.googleBusinessProfileController,
         ),
         Obx(
           () => _FormDropdown(
-            label: 'Year Of experience in business',
+            label: 'Years Of experience in business',
             hint: 'Select years of experience',
             value: controller.selectedExperience.value,
             items: controller.workingExperienceOptions,
@@ -601,7 +598,7 @@ class _StepTwoIndividual extends StatelessWidget {
         ),
         Obx(
           () => _FormDropdown(
-            label: 'Preffered pickup method',
+            label: 'Preferred pickup method',
             hint: 'self drop',
             value: controller.selectedPickupMethod.value,
             items: controller.storeTypeOptions,
@@ -727,14 +724,14 @@ class _StepThreeCommon extends StatelessWidget {
           controller: controller.ifscController,
         ),
         _FormTextField(
-          label: 'UPI Id',
-          hint: 'Enter UPI id',
+          label: 'UPI ID',
+          hint: 'Enter UPI ID',
           controller: controller.upiController,
         ),
         if (controller.isShopOwner)
           Obx(
             () => _FormDropdown(
-              label: "Business Proof type",
+              label: "Business Proof Type",
               hint: "Select business proof type",
               value: controller.selectedBusinessType.value,
               items: controller.businessTypeOptions,
@@ -757,7 +754,7 @@ class _StepThreeCommon extends StatelessWidget {
         Obx(() {
           if (controller.isBusinessTypeRentAgreement) {
             return _UploadPickerField(
-              label: "Upload Rent agreement",
+              label: "Upload Rent Agreement",
               selectedFileName: controller.selectedFiles["rent_agreement"],
               onTap: () => controller.pickFile("rent_agreement"),
             );
@@ -957,7 +954,7 @@ class _LastStepCommon extends StatelessWidget {
         Obx(
           () => _FormDropdown(
             label: 'Cleaning Buffer',
-            hint: 'Select cleaning buffer days (eg: 1 day)',
+            hint: 'Select cleaning buffer days (e.g., 1 day)',
             value: controller.selectedCleaningBuffer.value,
             items: controller.cleaningBufferOptions,
             onChanged: (String? value) =>
@@ -987,8 +984,8 @@ class _LastStepCommon extends StatelessWidget {
             value: controller.acceptTermsAndConditions.value,
             onChanged: (bool value) =>
                 controller.acceptTermsAndConditions.value = value,
-            readTermsText: "Read platform terms & condition",
-            readTermsVoidCallBack: () {},
+            readTermsText: "Read platform terms & conditions",
+            onReadTerms: () {},
           ),
         ),
         Obx(
@@ -999,7 +996,7 @@ class _LastStepCommon extends StatelessWidget {
             onChanged: (bool value) =>
                 controller.acceptCommissionAgreement.value = value,
             readTermsText: "Read commission agreement",
-            readTermsVoidCallBack: () {},
+            onReadTerms: () {},
           ),
         ),
         Obx(
@@ -1010,7 +1007,7 @@ class _LastStepCommon extends StatelessWidget {
             onChanged: (bool value) =>
                 controller.acceptCancellationPolicy.value = value,
             readTermsText: "Read platform terms & condition",
-            readTermsVoidCallBack: () {},
+            onReadTerms: () {},
           ),
         ),
         Obx(
@@ -1020,8 +1017,8 @@ class _LastStepCommon extends StatelessWidget {
             value: controller.acceptDepositRules.value,
             onChanged: (bool value) =>
                 controller.acceptDepositRules.value = value,
-            readTermsText: "Read deposit Rules",
-            readTermsVoidCallBack: () {},
+            readTermsText: "Read deposit rules",
+            onReadTerms: () {},
           ),
         ),
 
@@ -1070,7 +1067,7 @@ class _ShopOwnerAgreements extends StatelessWidget {
             onChanged: (bool value) =>
                 controller.acceptOrderHandlingRules.value = value,
             readTermsText: "Read Order handling responsibility rules",
-            readTermsVoidCallBack: () {},
+            onReadTerms: () {},
           ),
         ),
         Obx(
@@ -1081,7 +1078,7 @@ class _ShopOwnerAgreements extends StatelessWidget {
             onChanged: (bool value) =>
                 controller.acceptQualityStandards.value = value,
             readTermsText: "Read Quality standards rules",
-            readTermsVoidCallBack: () {},
+            onReadTerms: () {},
           ),
         ),
         Obx(
@@ -1092,7 +1089,7 @@ class _ShopOwnerAgreements extends StatelessWidget {
             onChanged: (bool value) =>
                 controller.acceptReturnHandlingRules.value = value,
             readTermsText: "Read Return handling rules",
-            readTermsVoidCallBack: () {},
+            onReadTerms: () {},
           ),
         ),
       ],
@@ -1137,7 +1134,7 @@ class _IndividualOwnerAgreement extends StatelessWidget {
             onChanged: (bool value) =>
                 controller.acceptPassiveOwnershipModel.value = value,
             readTermsText: "Read Passive ownership model",
-            readTermsVoidCallBack: () {},
+            onReadTerms: () {},
           ),
         ),
         Obx(
@@ -1148,7 +1145,7 @@ class _IndividualOwnerAgreement extends StatelessWidget {
             onChanged: (bool value) =>
                 controller.acceptPlatformPricingControl.value = value,
             readTermsText: "Read Platform pricing control",
-            readTermsVoidCallBack: () {},
+            onReadTerms: () {},
           ),
         ),
         Obx(
@@ -1159,7 +1156,7 @@ class _IndividualOwnerAgreement extends StatelessWidget {
             onChanged: (bool value) =>
                 controller.acceptRevenueShare.value = value,
             readTermsText: "Read revenue share % rules",
-            readTermsVoidCallBack: () {},
+            onReadTerms: () {},
           ),
         ),
         Obx(
@@ -1170,7 +1167,7 @@ class _IndividualOwnerAgreement extends StatelessWidget {
             onChanged: (bool value) =>
                 controller.acceptMaintenanceDeductionRules.value = value,
             readTermsText: "Read Maintenance deduction rules",
-            readTermsVoidCallBack: () {},
+            onReadTerms: () {},
           ),
         ),
       ],
@@ -1786,7 +1783,7 @@ class _ToggleInfoCard extends StatelessWidget {
     required this.value,
     required this.onChanged,
     this.readTermsText,
-    this.readTermsVoidCallBack,
+    this.onReadTerms,
   });
 
   final String title;
@@ -1794,7 +1791,7 @@ class _ToggleInfoCard extends StatelessWidget {
   final String? readTermsText;
   final bool value;
   final ValueChanged<bool> onChanged;
-  final VoidCallback? readTermsVoidCallBack;
+  final VoidCallback? onReadTerms;
 
   @override
   Widget build(BuildContext context) {
@@ -1852,12 +1849,11 @@ class _ToggleInfoCard extends StatelessWidget {
             ],
           ),
 
-          //optional
-          if (readTermsText != null && readTermsVoidCallBack != null)
+          if (readTermsText != null && onReadTerms != null)
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: readTermsVoidCallBack!,
+                onPressed: onReadTerms!,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.readTermsButton,
                   foregroundColor: AppColors.textPrimary,

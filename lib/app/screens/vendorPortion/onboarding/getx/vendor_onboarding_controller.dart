@@ -11,7 +11,7 @@ class VendorOnboardingController extends GetxController {
 
   final RxInt currentStep = 0.obs;
   //step 1
-  final TextEditingController phoneNumberContoller = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController ownerNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController shortBrandDescriptionController =
@@ -45,9 +45,8 @@ class VendorOnboardingController extends GetxController {
       TextEditingController();
   final Rx<RangeValues> priceRange = const RangeValues(0, 500).obs;
 
-
   //step 1
-  final RxnString selectedAccountType = RxnString();
+  final RxString selectedAccountType = shopOwner.obs;
 
   //step 2
   final RxnString selectedExperience = RxnString();
@@ -99,10 +98,12 @@ class VendorOnboardingController extends GetxController {
 
   //step 1
   List<String> get accountTypeOptions => const <String>[
-    'Shop Owner',
-    'Individual Owner',
+    shopOwner,
+    individualOwner,
   ];
 
+  static const String shopOwner = 'Shop Owner';
+  static const String individualOwner = 'Individual Owner';
   bool get isShopOwner => selectedAccountType.value == 'Shop Owner';
   bool get isIndividualOwner => selectedAccountType.value == 'Individual Owner';
 
@@ -147,12 +148,11 @@ class VendorOnboardingController extends GetxController {
     'Sunday',
   ];
 
-  //TODO: set year
   List<String> get workingExperienceOptions => <String>[
     "Less than 1 year",
-    "1 to 5 year",
-    "5 to 10 year",
-    "10 and above year",
+    "1 to 5 years",
+    "5 to 10 years",
+    "10 and above years",
   ];
 
   List<String> get pickupMethodOptions => <String>["sell", "drop"];
@@ -296,7 +296,7 @@ class VendorOnboardingController extends GetxController {
   @override
   void onClose() {
     // Step 1
-    phoneNumberContoller.dispose();
+    phoneNumberController.dispose();
     ownerNameController.dispose();
     emailController.dispose();
     shortBrandDescriptionController.dispose();
@@ -322,7 +322,6 @@ class VendorOnboardingController extends GetxController {
 
     // Step 4
     inventoryVolumeController.dispose();
-
 
     super.onClose();
   }
