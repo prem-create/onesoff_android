@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'app/controllers/app_session_controller.dart';
+import 'app/core/controllers/app_session_controller.dart';
 import 'app/routes/appPages.dart';
 import 'app/routes/appRoutes.dart';
-import 'app/utils/deviceConstants/appColors.dart';
-import 'app/utils/deviceConstants/appStrings.dart';
+import 'app/core/utils/deviceConstants/appColors.dart';
+import 'app/core/utils/deviceConstants/appStrings.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,22 +1,24 @@
 import 'package:get/get.dart';
+import 'package:onesoff/app/modules/vendor/adminAsVendor_module5/tabs/adminAsVendor_tab.dart';
+import 'package:onesoff/app/modules/vendor/shopOwner_module4/tabs/shopOwner_tab.dart';
 
-import '../screens/common/auth/getx/login_controller.dart';
-import '../screens/common/auth/getx/otp_controller.dart';
-import '../screens/common/auth/login_screen.dart';
-import '../screens/common/auth/otp_verification_screen.dart';
-import '../screens/common/onboarding/getx/onboarding_controller.dart';
-import '../screens/common/onboarding/onboarding_screen.dart';
-import '../screens/common/splash/getx/splash_controller.dart';
-import '../screens/common/splash/splash_screen.dart';
-import '../screens/common/welcome/user_selection_screen.dart';
-import '../screens/customerPortion/home/getx/customer_home_controller.dart';
-import '../screens/customerPortion/home/customer_home_screen.dart';
-import '../screens/customerPortion/productDetails/customer_product_details_screen.dart';
-import '../screens/customerPortion/search/customer_search_screen.dart';
-import '../screens/customerPortion/search/getx/customer_search_controller.dart';
-import '../screens/vendorPortion/home/vendor_home_screen.dart';
-import '../screens/vendorPortion/onboarding/getx/vendor_onboarding_controller.dart';
-import '../screens/vendorPortion/onboarding/vendor_onboarding_screen.dart';
+import '../modules/common/auth/login/getx/controllers/login_controller.dart';
+import '../modules/common/auth/otp/getx/controllers/otp_controller.dart';
+import '../modules/common/auth/login/view/login_screen.dart';
+import '../modules/common/auth/otp/view/otp_verification_screen.dart';
+import '../modules/common/onboarding/getx/controllers/onboarding_controller.dart';
+import '../modules/common/onboarding/view/onboarding_screen.dart';
+import '../modules/common/splash/getx/controllers/splash_controller.dart';
+import '../modules/common/splash/view/splash_screen.dart';
+import '../modules/common/welcome/user_selection_screen.dart';
+import '../modules/customer/home/getx/customer_home_controller.dart';
+import '../modules/customer/home/customer_home_screen.dart';
+import '../modules/customer/productDetails/customer_product_details_screen.dart';
+import '../modules/customer/search/customer_search_screen.dart';
+import '../modules/customer/search/getx/customer_search_controller.dart';
+
+import '../modules/vendor/commonOnboarding/getx/contollers/vendorOnboarding_controller.dart';
+import '../modules/vendor/commonOnboarding/vendorOnboarding_screen.dart';
 import 'appRoutes.dart';
 
 class AppPages {
@@ -90,8 +92,13 @@ class AppPages {
       transition: Transition.cupertino,
     ),
     GetPage(
-      name: AppRoutes.vendorDashboard,
-      page: () => const VendorHomeScreen(),
+      name: AppRoutes.shopOwner,
+      page: () => const ShopOwnerTab(),
+      transition: Transition.cupertino,
+    ),
+    GetPage(
+      name: AppRoutes.adminAsVendor,
+      page: () => const AdminAsVendorTab(),
       transition: Transition.cupertino,
     ),
   ];
