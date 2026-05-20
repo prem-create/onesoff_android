@@ -16,6 +16,8 @@ import '../modules/customer/home/customer_home_screen.dart';
 import '../modules/customer/productDetails/customer_product_details_screen.dart';
 import '../modules/customer/search/customer_search_screen.dart';
 import '../modules/customer/search/getx/customer_search_controller.dart';
+import '../modules/seller/getx/bindings/seller_bottom_nav_bar_binding.dart';
+import '../modules/seller/seller_bottom_nav_bar.dart';
 
 import '../modules/vendor/commonOnboarding/getx/contollers/vendorOnboarding_controller.dart';
 import '../modules/vendor/commonOnboarding/vendorOnboarding_screen.dart';
@@ -92,10 +94,18 @@ class AppPages {
       transition: Transition.cupertino,
     ),
     GetPage(
+      name: AppRoutes.seller,
+      page: () => const SellerBottomNavBar(),
+      binding: SellerBottomNavBarBinding(),
+      transition: Transition.cupertino,
+    ),
+
+    GetPage(
       name: AppRoutes.shopOwner,
       page: () => const ShopOwnerTab(),
       transition: Transition.cupertino,
     ),
+
     GetPage(
       name: AppRoutes.adminAsVendor,
       page: () => const AdminAsVendorTab(),

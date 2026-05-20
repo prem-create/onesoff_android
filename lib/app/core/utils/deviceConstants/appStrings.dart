@@ -131,4 +131,30 @@ class AppStrings {
   static const String welcomeVendorTitle = 'Welcome as Vendor';
   static const String welcomeVendorDescription =
       'Your vendor profile is all set up. Let\'s start managing your store.';
+
+  static const String sellerBrandTitle = 'Onesoff';
+  static const String sellerName = 'Sheetal';
+  static const String sellerDashboardNotificationCount = '6';
+  static const String sellerNavDashboard = 'Dashboard';
+  static const String sellerNavProducts = 'Products';
+  static const String sellerNavEarnings = 'Earnings';
+  static const String sellerNavProfile = 'Profile';
+
+  static const String sellerDashboardWelcomeBack = 'Welcome back';
+  static const String sellerDashboardHeadline = 'Manage your rental business';
+  static const String sellerDashboardDescription =
+      'Track listings, orders, and customer actions from one place.';
+  static const String sellerDashboardTodayFocus = 'Today focus';
+  static const String sellerMetricActiveListings = 'Active listings';
+  static const String sellerMetricTodayOrders = 'Today orders';
+  static const String sellerMetricPendingReturns = 'Pending returns';
+  static const String sellerMetricRevenue = 'Revenue';
+  static const String sellerMetricActiveListingsValue = '24';
+  static const String sellerMetricTodayOrdersValue = '08';
+  static const String sellerMetricPendingReturnsValue = '03';
+  static const String sellerMetricRevenueValue = 'Rs.18.4k';
+  static const String sellerTaskReviewRequests = 'Review new rental requests';
+  static const String sellerTaskUpdateStock = 'Update stock availability';
+  static const String sellerTaskPreparePickupPackages =
+      'Prepare two pickup packages';
 }
