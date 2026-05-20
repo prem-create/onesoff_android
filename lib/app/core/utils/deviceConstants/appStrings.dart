@@ -141,20 +141,12 @@ class AppStrings {
   static const String sellerNavProfile = 'Profile';
 
   static const String sellerDashboardWelcomeBack = 'Welcome back';
-  static const String sellerDashboardHeadline = 'Manage your rental business';
-  static const String sellerDashboardDescription =
-      'Track listings, orders, and customer actions from one place.';
-  static const String sellerDashboardTodayFocus = 'Today focus';
-  static const String sellerMetricActiveListings = 'Active listings';
-  static const String sellerMetricTodayOrders = 'Today orders';
-  static const String sellerMetricPendingReturns = 'Pending returns';
-  static const String sellerMetricRevenue = 'Revenue';
-  static const String sellerMetricActiveListingsValue = '24';
-  static const String sellerMetricTodayOrdersValue = '08';
-  static const String sellerMetricPendingReturnsValue = '03';
-  static const String sellerMetricRevenueValue = 'Rs.18.4k';
-  static const String sellerTaskReviewRequests = 'Review new rental requests';
-  static const String sellerTaskUpdateStock = 'Update stock availability';
-  static const String sellerTaskPreparePickupPackages =
-      'Prepare two pickup packages';
+  static const String sellerMetricTotalOutfitListed = 'Total outfit Listed';
+  static const String sellerMetricActiveRentals = 'Active Rentals';
+  static const String sellerMetricTotalIncome = 'Total Income';
+  static const String sellerMetricTotalOutfitListedValue = '6';
+  static const String sellerMetricActiveRentalsValue = '4';
+  static const String sellerMetricTotalIncomeValue = 'Rs 25,000';
+  static const String sellerIncomeTrendsTitle = 'Income Trends';
+  static const String sellerIncomeTrendsLegend = 'Monthly Income';
 }
