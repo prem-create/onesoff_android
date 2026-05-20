@@ -46,6 +46,9 @@ class SellerBottomNavBar extends GetView<SellerBottomNavBarController> {
         backgroundColor: AppColors.dashboardSurface,
         appBar: _buildAppBar(context, index),
         body: IndexedStack(index: index, children: _tabs),
+        floatingActionButton: index == 1
+            ? _sellerAddProductButton(context)
+            : null,
         bottomNavigationBar: _SellerNavigationBar(
           items: _items,
           selectedIndex: index,
@@ -78,6 +81,32 @@ class SellerBottomNavBar extends GetView<SellerBottomNavBarController> {
       leading: const _SellerDashboardLogo(),
       title: const _SellerDashboardTitle(),
       actions: const <Widget>[_SellerNotificationButton()],
+    );
+  }
+
+  Widget _sellerAddProductButton(BuildContext context) {
+    final double buttonSize = DeviceResponsive.r(
+      context,
+      56,
+    ).clamp(50, 60).toDouble();
+    final double iconSize = DeviceResponsive.r(
+      context,
+      28,
+    ).clamp(24, 30).toDouble();
+
+    return SizedBox(
+      width: buttonSize,
+      height: buttonSize,
+      child: FloatingActionButton(
+        shape: const CircleBorder(),
+        backgroundColor: AppColors.primary,
+        onPressed: () {},
+        child: Icon(
+          Icons.add_circle_outline,
+          color: Colors.white,
+          size: iconSize,
+        ),
+      ),
     );
   }
 }
