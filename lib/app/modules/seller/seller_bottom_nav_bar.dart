@@ -46,7 +46,6 @@ class SellerBottomNavBar extends GetView<SellerBottomNavBarController> {
         backgroundColor: AppColors.dashboardSurface,
         appBar: _buildAppBar(context, index),
         body: IndexedStack(index: index, children: _tabs),
-
         bottomNavigationBar: _SellerNavigationBar(
           items: _items,
           selectedIndex: index,

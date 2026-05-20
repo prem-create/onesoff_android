@@ -151,5 +151,11 @@ class AppStrings {
   static const String sellerIncomeTrendsLegend = 'Monthly Income';
 
   static const String sellerProductTabAppBarTitle = "Our Products";
+  static const String sellerProductTotalOutfits = 'Total Outfits Listed';
+static const String sellerProductLiveOutfits = 'Live Outfits';
+static const String sellerProductPendingApproval = 'Pending Approval';
+static const String sellerProductTotalOutfitsValue = '6';
+static const String sellerProductLiveOutfitsValue = '4';
+static const String sellerProductPendingApprovalValue = '2';
 
 }
