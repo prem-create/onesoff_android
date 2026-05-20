@@ -149,4 +149,7 @@ class AppStrings {
   static const String sellerMetricTotalIncomeValue = 'Rs 25,000';
   static const String sellerIncomeTrendsTitle = 'Income Trends';
   static const String sellerIncomeTrendsLegend = 'Monthly Income';
+
+  static const String sellerProductTabAppBarTitle = "Our Products";
+
 }

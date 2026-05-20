@@ -300,9 +300,7 @@ class SellerIncomeBarChart extends StatelessWidget {
         ),
         borderData: FlBorderData(
           show: true,
-          border: Border(
-            
-            bottom: BorderSide()),
+          border: Border(bottom: BorderSide()),
         ),
         titlesData: FlTitlesData(
           topTitles: const AxisTitles(
