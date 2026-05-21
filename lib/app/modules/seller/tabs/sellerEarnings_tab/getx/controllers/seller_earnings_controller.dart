@@ -57,6 +57,17 @@ class SellerEarningsController extends GetxController {
         ),
       ];
 
+  final List<SellerTransactionDetailItem> transactionDetails =
+      const <SellerTransactionDetailItem>[
+        SellerTransactionDetailItem(
+          settlementId: '#SET-7',
+          processedDate: '21 May 2026',
+          amount: 'Rs 22,091.6',
+          period: 'Processed 21 May 2026',
+          status: AppStrings.sellerTransactionDetailsStatusPaid,
+        ),
+      ];
+
   List<SellerEarningBreakdownItem> get filteredBreakdownItems {
     if (selectedBreakdownFilter.value ==
         AppStrings.sellerEarningsBreakdownFilterAll) {
@@ -101,5 +112,21 @@ class SellerEarningBreakdownItem {
   final String rentalPrice;
   final String commissionAmount;
   final String netIncome;
+  final String status;
+}
+
+class SellerTransactionDetailItem {
+  const SellerTransactionDetailItem({
+    required this.settlementId,
+    required this.processedDate,
+    required this.amount,
+    required this.period,
+    required this.status,
+  });
+
+  final String settlementId;
+  final String processedDate;
+  final String amount;
+  final String period;
   final String status;
 }

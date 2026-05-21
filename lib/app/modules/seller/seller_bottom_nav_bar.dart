@@ -295,13 +295,15 @@ AppBar _earningsAppBar(BuildContext context) {
     toolbarHeight: toolbarHeight,
     backgroundColor: AppColors.primary,
     titleSpacing: DeviceResponsive.w(context, 16),
-    title: Obx(
-      () => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(
-            AppStrings.sellerEarningsTabAppBarTitle,
+    title: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Obx(
+          () => Text(
+            earningsController.isEarningsSelected.value
+                ? AppStrings.sellerEarningsTabAppBarTitle
+                : AppStrings.sellerTransactionDetailsTabAppBarTitle,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
@@ -310,123 +312,121 @@ AppBar _earningsAppBar(BuildContext context) {
               fontWeight: FontWeight.w700,
             ),
           ),
-          if (earningsController.isEarningsSelected.value) ...<Widget>[
-            SizedBox(height: DeviceResponsive.h(context, 8)),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: InkWell(
-                    onTap: () {},
+        ),
+        SizedBox(height: DeviceResponsive.h(context, 8)),
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: InkWell(
+                onTap: () {},
+                borderRadius: BorderRadius.circular(
+                  DeviceResponsive.r(context, 8),
+                ),
+                child: Container(
+                  height: DeviceResponsive.fluid(context, min: 44, max: 48),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: DeviceResponsive.w(context, 12),
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(
                       DeviceResponsive.r(context, 8),
                     ),
-                    child: Container(
-                      height: DeviceResponsive.fluid(context, min: 44, max: 48),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: DeviceResponsive.w(context, 12),
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(
-                          DeviceResponsive.r(context, 8),
-                        ),
-                      ),
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: Text(
-                              AppStrings.dashboardSearchHint,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                color: const Color(0xFF6E747D),
-                                fontSize: DeviceResponsive.sp(
-                                  context,
-                                  13.5,
-                                  minScale: 0.86,
-                                  maxScale: 1,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Icon(
-                            Icons.search_rounded,
-                            color: const Color(0xFF2C2F34),
-                            size: DeviceResponsive.r(context, 26),
-                          ),
-                        ],
-                      ),
-                    ),
                   ),
-                ),
-                SizedBox(width: DeviceResponsive.w(context, 10)),
-                SizedBox(
-                  width: buttonSize,
-                  height: buttonSize,
-                  child: Stack(
-                    clipBehavior: Clip.none,
+                  child: Row(
                     children: <Widget>[
-                      Positioned.fill(
-                        child: Material(
-                          color: Colors.white.withValues(alpha: 0.12),
-                          shape: const CircleBorder(),
-                          child: InkWell(
-                            customBorder: const CircleBorder(),
-                            onTap: () {},
-                            child: Icon(
-                              Icons.notifications_rounded,
-                              color: const Color(0xFFFFD84D),
-                              size: iconSize,
+                      Expanded(
+                        child: Text(
+                          AppStrings.dashboardSearchHint,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: const Color(0xFF6E747D),
+                            fontSize: DeviceResponsive.sp(
+                              context,
+                              13.5,
+                              minScale: 0.86,
+                              maxScale: 1,
                             ),
                           ),
                         ),
                       ),
-                      Positioned(
-                        top: -DeviceResponsive.r(context, 1),
-                        right: -DeviceResponsive.r(context, 1),
-                        child: Container(
-                          constraints: BoxConstraints(
-                            minWidth: badgeSize,
-                            minHeight: badgeSize,
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: DeviceResponsive.w(context, 3),
-                          ),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: AppColors.dashboardSurface,
-                            borderRadius: BorderRadius.circular(badgeSize),
-                            border: Border.all(
-                              color: AppColors.primary,
-                              width: DeviceResponsive.r(context, 1),
-                            ),
-                          ),
-                          child: Text(
-                            AppStrings.sellerDashboardNotificationCount,
-                            maxLines: 1,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: AppColors.primary,
-                              fontSize: DeviceResponsive.sp(
-                                context,
-                                9,
-                                minScale: 0.9,
-                                maxScale: 1.08,
-                              ),
-                              fontWeight: FontWeight.w700,
-                              height: 1,
-                            ),
-                          ),
-                        ),
+                      Icon(
+                        Icons.search_rounded,
+                        color: const Color(0xFF2C2F34),
+                        size: DeviceResponsive.r(context, 26),
                       ),
                     ],
                   ),
                 ),
-              ],
+              ),
+            ),
+            SizedBox(width: DeviceResponsive.w(context, 10)),
+            SizedBox(
+              width: buttonSize,
+              height: buttonSize,
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: <Widget>[
+                  Positioned.fill(
+                    child: Material(
+                      color: Colors.white.withValues(alpha: 0.12),
+                      shape: const CircleBorder(),
+                      child: InkWell(
+                        customBorder: const CircleBorder(),
+                        onTap: () {},
+                        child: Icon(
+                          Icons.notifications_rounded,
+                          color: const Color(0xFFFFD84D),
+                          size: iconSize,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: -DeviceResponsive.r(context, 1),
+                    right: -DeviceResponsive.r(context, 1),
+                    child: Container(
+                      constraints: BoxConstraints(
+                        minWidth: badgeSize,
+                        minHeight: badgeSize,
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: DeviceResponsive.w(context, 3),
+                      ),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: AppColors.dashboardSurface,
+                        borderRadius: BorderRadius.circular(badgeSize),
+                        border: Border.all(
+                          color: AppColors.primary,
+                          width: DeviceResponsive.r(context, 1),
+                        ),
+                      ),
+                      child: Text(
+                        AppStrings.sellerDashboardNotificationCount,
+                        maxLines: 1,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: AppColors.primary,
+                          fontSize: DeviceResponsive.sp(
+                            context,
+                            9,
+                            minScale: 0.9,
+                            maxScale: 1.08,
+                          ),
+                          fontWeight: FontWeight.w700,
+                          height: 1,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
-        ],
-      ),
+        ),
+      ],
     ),
   );
 }

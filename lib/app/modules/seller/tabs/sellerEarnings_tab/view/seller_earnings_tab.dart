@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:onesoff/app/core/utils/deviceConstants/appColors.dart';
+import 'package:onesoff/app/core/utils/deviceConstants/appStrings.dart';
 import 'package:onesoff/app/core/utils/deviceUtility/deviceResponsive.dart';
 import 'package:onesoff/app/modules/seller/tabs/sellerEarnings_tab/view/earningSection.dart';
 import 'package:onesoff/app/modules/seller/tabs/sellerEarnings_tab/view/transactionDetailsSection.dart';
@@ -43,7 +44,7 @@ class SellerEarningsTab extends GetView<SellerEarningsController> {
                       ),
                     ),
                     child: Text(
-                      'Earnings',
+                      AppStrings.sellerEarningsTabAppBarTitle,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
@@ -75,7 +76,7 @@ class SellerEarningsTab extends GetView<SellerEarningsController> {
                       ),
                     ),
                     child: Text(
-                      'Transaction Details',
+                      AppStrings.sellerTransactionDetailsTabAppBarTitle,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
@@ -94,9 +95,11 @@ class SellerEarningsTab extends GetView<SellerEarningsController> {
           ),
         ),
 
-        controller.isEarningsSelected.value
-            ? Expanded(child: const EarningSection())
-            : TransactionDetailsSection(),
+        Obx(
+          () => controller.isEarningsSelected.value
+              ? const Expanded(child: EarningSection())
+              : const Expanded(child: TransactionDetailsSection()),
+        ),
       ],
     );
   }

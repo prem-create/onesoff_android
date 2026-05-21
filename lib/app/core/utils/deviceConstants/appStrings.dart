@@ -159,6 +159,8 @@ class AppStrings {
   static const String sellerProductPendingApprovalValue = '2';
 
   static const String sellerEarningsTabAppBarTitle = 'Earnings';
+  static const String sellerTransactionDetailsTabAppBarTitle =
+      'Transaction Details';
   static const String sellerEarningsMonthlyEarnings = 'Monthly Earnings';
   static const String sellerEarningsNetIncome = 'Net Income';
   static const String sellerEarningsReceivedSaving = 'Received Saving';
@@ -178,4 +180,11 @@ class AppStrings {
   static const String sellerEarningsEmptyTitle = 'No earnings rows yet';
   static const String sellerEarningsEmptyDescription =
       'Once order and payout data is connected, every deduction and net amount will appear here.';
+  static const String sellerTransactionDetailsTitle = 'Transaction Details';
+  static const String sellerTransactionDetailsSubtitle =
+      'Settlement records sync here after admin payout actions, along with any selected order-level earning detail.';
+  static const String sellerTransactionDetailsHistoryTitle =
+      'Settlement History';
+  static const String sellerTransactionDetailsViewAction = 'View';
+  static const String sellerTransactionDetailsStatusPaid = 'PAID';
 }
