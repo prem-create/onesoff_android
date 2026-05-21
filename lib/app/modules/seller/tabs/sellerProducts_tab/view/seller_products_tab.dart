@@ -312,15 +312,41 @@ class _MetricTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              item.label,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: AppColors.textSecondary,
-                fontSize: DeviceResponsive.sp(context, 10.5, minScale: 0.86),
-                height: 1.15,
-              ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Expanded(
+                  child: Text(
+                    item.label,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      color: AppColors.textSecondary,
+                      fontSize: DeviceResponsive.sp(
+                        context,
+                        10.5,
+                        minScale: 0.86,
+                      ),
+                      height: 1.15,
+                    ),
+                  ),
+                ),
+                SizedBox(width: DeviceResponsive.w(context, 2)),
+                SizedBox(
+                  width: DeviceResponsive.r(context, 22),
+                  height: DeviceResponsive.r(context, 22),
+                  child: IconButton(
+                    onPressed: () {},
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(),
+                    icon: Icon(
+                      Icons.calendar_month,
+                      color: AppColors.textSecondary,
+                      size: DeviceResponsive.r(context, 15),
+                    ),
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: DeviceResponsive.h(context, 5)),
             Text(

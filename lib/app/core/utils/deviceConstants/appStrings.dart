@@ -152,10 +152,17 @@ class AppStrings {
 
   static const String sellerProductTabAppBarTitle = "Our Products";
   static const String sellerProductTotalOutfits = 'Total Outfits Listed';
-static const String sellerProductLiveOutfits = 'Live Outfits';
-static const String sellerProductPendingApproval = 'Pending Approval';
-static const String sellerProductTotalOutfitsValue = '6';
-static const String sellerProductLiveOutfitsValue = '4';
-static const String sellerProductPendingApprovalValue = '2';
+  static const String sellerProductLiveOutfits = 'Live Outfits';
+  static const String sellerProductPendingApproval = 'Pending Approval';
+  static const String sellerProductTotalOutfitsValue = '6';
+  static const String sellerProductLiveOutfitsValue = '4';
+  static const String sellerProductPendingApprovalValue = '2';
 
+  static const String sellerEarningsTabAppBarTitle = 'Earnings';
+  static const String sellerEarningsMonthlyEarnings = 'Monthly Earnings';
+  static const String sellerEarningsNetIncome = 'Net Income';
+  static const String sellerEarningsReceivedSaving = 'Received Saving';
+  static const String sellerEarningsMonthlyEarningsValue = 'Rs 1,000';
+  static const String sellerEarningsNetIncomeValue = 'Rs 800';
+  static const String sellerEarningsReceivedSavingValue = 'Rs 0';
 }

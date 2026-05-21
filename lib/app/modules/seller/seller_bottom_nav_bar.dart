@@ -6,7 +6,9 @@ import '../../core/utils/deviceConstants/appColors.dart';
 import '../../core/utils/deviceConstants/appStrings.dart';
 import '../../core/utils/deviceUtility/deviceResponsive.dart';
 import 'getx/controllers/seller_bottom_nav_bar_controller.dart';
+import 'tabs/sellerEarnings_tab/getx/controllers/seller_earnings_controller.dart';
 import 'tabs/sellerDashboard_tab/view/seller_dashboard_tab.dart';
+import 'tabs/sellerEarnings_tab/view/seller_earnings_tab.dart';
 import 'tabs/sellerProducts_tab/view/seller_products_tab.dart';
 
 class SellerBottomNavBar extends GetView<SellerBottomNavBarController> {
@@ -34,7 +36,7 @@ class SellerBottomNavBar extends GetView<SellerBottomNavBarController> {
   static const List<Widget> _tabs = <Widget>[
     SellerDashboardTab(),
     SellerProductsTab(),
-    SizedBox.shrink(),
+    SellerEarningsTab(),
     SizedBox.shrink(),
   ];
 
@@ -64,6 +66,8 @@ class SellerBottomNavBar extends GetView<SellerBottomNavBarController> {
         return _dashboardAppBar(context);
       case 1:
         return _productsAppBar(context);
+      case 2:
+        return _earningsAppBar(context);
 
       default:
         return AppBar(backgroundColor: AppColors.dashboardSurface);
@@ -262,6 +266,167 @@ AppBar _productsAppBar(BuildContext context) {
           ],
         ),
       ],
+    ),
+  );
+}
+
+AppBar _earningsAppBar(BuildContext context) {
+  final SellerEarningsController earningsController =
+      Get.find<SellerEarningsController>();
+  final double toolbarHeight = DeviceResponsive.fluid(
+    context,
+    min: 88,
+    max: 104,
+  );
+  final double buttonSize = DeviceResponsive.r(
+    context,
+    38,
+  ).clamp(34, 42).toDouble();
+  final double iconSize = DeviceResponsive.r(
+    context,
+    20,
+  ).clamp(18, 22).toDouble();
+  final double badgeSize = DeviceResponsive.r(
+    context,
+    15,
+  ).clamp(13, 16).toDouble();
+
+  return AppBar(
+    toolbarHeight: toolbarHeight,
+    backgroundColor: AppColors.primary,
+    titleSpacing: DeviceResponsive.w(context, 16),
+    title: Obx(
+      () => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            AppStrings.sellerEarningsTabAppBarTitle,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: AppColors.textOnDark,
+              fontSize: DeviceResponsive.sp(context, 16, minScale: 0.92),
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          if (earningsController.isEarningsSelected.value) ...<Widget>[
+            SizedBox(height: DeviceResponsive.h(context, 8)),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: InkWell(
+                    onTap: () {},
+                    borderRadius: BorderRadius.circular(
+                      DeviceResponsive.r(context, 8),
+                    ),
+                    child: Container(
+                      height: DeviceResponsive.fluid(context, min: 44, max: 48),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: DeviceResponsive.w(context, 12),
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(
+                          DeviceResponsive.r(context, 8),
+                        ),
+                      ),
+                      child: Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(
+                              AppStrings.dashboardSearchHint,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: const Color(0xFF6E747D),
+                                fontSize: DeviceResponsive.sp(
+                                  context,
+                                  13.5,
+                                  minScale: 0.86,
+                                  maxScale: 1,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Icon(
+                            Icons.search_rounded,
+                            color: const Color(0xFF2C2F34),
+                            size: DeviceResponsive.r(context, 26),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: DeviceResponsive.w(context, 10)),
+                SizedBox(
+                  width: buttonSize,
+                  height: buttonSize,
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: <Widget>[
+                      Positioned.fill(
+                        child: Material(
+                          color: Colors.white.withValues(alpha: 0.12),
+                          shape: const CircleBorder(),
+                          child: InkWell(
+                            customBorder: const CircleBorder(),
+                            onTap: () {},
+                            child: Icon(
+                              Icons.notifications_rounded,
+                              color: const Color(0xFFFFD84D),
+                              size: iconSize,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: -DeviceResponsive.r(context, 1),
+                        right: -DeviceResponsive.r(context, 1),
+                        child: Container(
+                          constraints: BoxConstraints(
+                            minWidth: badgeSize,
+                            minHeight: badgeSize,
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: DeviceResponsive.w(context, 3),
+                          ),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: AppColors.dashboardSurface,
+                            borderRadius: BorderRadius.circular(badgeSize),
+                            border: Border.all(
+                              color: AppColors.primary,
+                              width: DeviceResponsive.r(context, 1),
+                            ),
+                          ),
+                          child: Text(
+                            AppStrings.sellerDashboardNotificationCount,
+                            maxLines: 1,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: AppColors.primary,
+                              fontSize: DeviceResponsive.sp(
+                                context,
+                                9,
+                                minScale: 0.9,
+                                maxScale: 1.08,
+                              ),
+                              fontWeight: FontWeight.w700,
+                              height: 1,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ],
+      ),
     ),
   );
 }
