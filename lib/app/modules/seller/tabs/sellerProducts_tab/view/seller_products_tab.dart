@@ -46,57 +46,6 @@ class SellerProductsTab extends GetView<SellerProductsController> {
   }
 }
 
-class _MetricTile extends StatelessWidget {
-  const _MetricTile({required this.item});
-
-  final SellerMetricItem item;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: DeviceResponsive.h(context, 85),
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: DeviceResponsive.w(context, 8),
-          vertical: DeviceResponsive.h(context, 10),
-        ),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(DeviceResponsive.r(context, 10)),
-          border: Border.all(color: const Color(0xFFE0E2E7)),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              item.label,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: AppColors.textSecondary,
-                fontSize: DeviceResponsive.sp(context, 10.5, minScale: 0.86),
-                height: 1.15,
-              ),
-            ),
-            SizedBox(height: DeviceResponsive.h(context, 5)),
-            Text(
-              item.value,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: AppColors.primary,
-                fontSize: DeviceResponsive.sp(context, 17, minScale: 0.86),
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class ProductCard extends StatelessWidget {
   const ProductCard({super.key, required this.product});
 
@@ -228,37 +177,160 @@ class ProductCard extends StatelessWidget {
                     ),
                   ],
                   SizedBox(height: DeviceResponsive.h(context, 6)),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: DeviceResponsive.w(context, 8),
-                      vertical: DeviceResponsive.h(context, 5),
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.blue.withAlpha(20),
-                      border: BoxBorder.all(
-                        style: BorderStyle.solid,
-                        color: Colors.blue,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        DeviceResponsive.r(context, 10),
-                      ),
-                    ),
-                    child: Text(
-                      product.message,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: DeviceResponsive.sp(
-                          context,
-                          10,
-                          minScale: 0.86,
-                          maxScale: 1.08,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: DeviceResponsive.w(context, 8),
+                            vertical: DeviceResponsive.h(context, 5),
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.blue.withAlpha(20),
+                            border: BoxBorder.all(
+                              style: BorderStyle.solid,
+                              color: Colors.blue,
+                            ),
+                            borderRadius: BorderRadius.circular(
+                              DeviceResponsive.r(context, 10),
+                            ),
+                          ),
+                          child: Text(
+                            product.message,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: DeviceResponsive.sp(
+                                context,
+                                10,
+                                minScale: 0.86,
+                                maxScale: 1.08,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                      SizedBox(width: DeviceResponsive.w(context, 5)),
+                      _productActionButtons(context),
+                    ],
                   ),
                 ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _productActionButtons(BuildContext context) {
+    final double buttonSize = DeviceResponsive.r(
+      context,
+      25,
+    ).clamp(22, 28).toDouble();
+    final double iconSize = DeviceResponsive.r(
+      context,
+      15,
+    ).clamp(13, 17).toDouble();
+    final double gap = DeviceResponsive.w(context, 5);
+    final double radius = DeviceResponsive.r(context, 8);
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        _ProductActionButton(
+          size: buttonSize,
+          iconSize: iconSize,
+          radius: radius,
+          icon: Icons.format_indent_decrease,
+        ),
+        SizedBox(width: gap),
+        _ProductActionButton(
+          size: buttonSize,
+          iconSize: iconSize,
+          radius: radius,
+          icon: Icons.edit,
+        ),
+      ],
+    );
+  }
+}
+
+class _ProductActionButton extends StatelessWidget {
+  const _ProductActionButton({
+    required this.size,
+    required this.iconSize,
+    required this.radius,
+    required this.icon,
+  });
+
+  final double size;
+  final double iconSize;
+  final double radius;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {},
+      borderRadius: BorderRadius.circular(radius),
+      child: Container(
+        height: size,
+        width: size,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          border: Border.all(color: const Color(0xFF7D838D)),
+          borderRadius: BorderRadius.circular(radius),
+        ),
+        child: Icon(icon, color: const Color(0xFF2C2F34), size: iconSize),
+      ),
+    );
+  }
+}
+
+class _MetricTile extends StatelessWidget {
+  const _MetricTile({required this.item});
+
+  final SellerMetricItem item;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: DeviceResponsive.h(context, 85),
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: DeviceResponsive.w(context, 8),
+          vertical: DeviceResponsive.h(context, 10),
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(DeviceResponsive.r(context, 10)),
+          border: Border.all(color: const Color(0xFFE0E2E7)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              item.label,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: AppColors.textSecondary,
+                fontSize: DeviceResponsive.sp(context, 10.5, minScale: 0.86),
+                height: 1.15,
+              ),
+            ),
+            SizedBox(height: DeviceResponsive.h(context, 5)),
+            Text(
+              item.value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: AppColors.primary,
+                fontSize: DeviceResponsive.sp(context, 17, minScale: 0.86),
+                fontWeight: FontWeight.w700,
               ),
             ),
           ],
