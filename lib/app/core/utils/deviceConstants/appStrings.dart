@@ -185,6 +185,12 @@ class AppStrings {
       'Settlement records sync here after admin payout actions, along with any selected order-level earning detail.';
   static const String sellerTransactionDetailsHistoryTitle =
       'Settlement History';
+  static const String sellerTransactionDetailsSelectedOrderTitle =
+      'Selected Order Breakdown';
+  static const String sellerTransactionDetailsNoOrderSelectedTitle =
+      'No order selected';
+  static const String sellerTransactionDetailsNoOrderSelectedSubtitle =
+      'Pick an order from the Earnings tab if you want to compare its earning breakdown with a settlement record.';
   static const String sellerTransactionDetailsViewAction = 'View';
   static const String sellerTransactionDetailsStatusPaid = 'PAID';
 }

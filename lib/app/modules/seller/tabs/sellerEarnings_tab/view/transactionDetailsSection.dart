@@ -79,6 +79,8 @@ class _TransactionDetailsLayout extends StatelessWidget {
                 )
                 .toList(growable: false),
           ),
+          SizedBox(height: DeviceResponsive.h(context, 4)),
+          const _SelectedOrderBreakdown(),
         ],
       ),
     );
@@ -255,6 +257,115 @@ class _SettlementHistoryCard extends StatelessWidget {
               SizedBox(width: DeviceResponsive.w(context, 8)),
               _SettlementViewButton(onPressed: () {}),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SelectedOrderBreakdown extends StatelessWidget {
+  const _SelectedOrderBreakdown();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(
+        horizontal: DeviceResponsive.w(context, 12),
+        vertical: DeviceResponsive.h(context, 14),
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(DeviceResponsive.r(context, 12)),
+        border: Border.all(color: const Color(0xFFD5D8DF)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const _SelectedOrderBreakdownHeader(),
+          SizedBox(height: DeviceResponsive.h(context, 12)),
+          const _NoOrderSelectedCard(),
+        ],
+      ),
+    );
+  }
+}
+
+class _SelectedOrderBreakdownHeader extends StatelessWidget {
+  const _SelectedOrderBreakdownHeader();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        Icon(
+          Icons.attach_money_rounded,
+          color: AppColors.primary,
+          size: DeviceResponsive.r(context, 18),
+        ),
+        SizedBox(width: DeviceResponsive.w(context, 6)),
+        Expanded(
+          child: Text(
+            AppStrings.sellerTransactionDetailsSelectedOrderTitle,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: AppColors.textPrimary,
+              fontSize: DeviceResponsive.sp(context, 14, minScale: 0.9),
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _NoOrderSelectedCard extends StatelessWidget {
+  const _NoOrderSelectedCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(
+        horizontal: DeviceResponsive.w(context, 16),
+        vertical: DeviceResponsive.h(context, 24),
+      ),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(DeviceResponsive.r(context, 12)),
+        border: Border.all(color: const Color(0xFFD5D8DF)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Icon(
+            Icons.currency_rupee_rounded,
+            color: AppColors.primary,
+            size: DeviceResponsive.r(context, 30),
+          ),
+          SizedBox(height: DeviceResponsive.h(context, 8)),
+          Text(
+            AppStrings.sellerTransactionDetailsNoOrderSelectedTitle,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: AppColors.textPrimary,
+              fontSize: DeviceResponsive.sp(context, 14, minScale: 0.9),
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          SizedBox(height: DeviceResponsive.h(context, 4)),
+          Text(
+            AppStrings.sellerTransactionDetailsNoOrderSelectedSubtitle,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: AppColors.textSecondary,
+              fontSize: DeviceResponsive.sp(context, 11, minScale: 0.9),
+              height: 1.3,
+            ),
           ),
         ],
       ),
