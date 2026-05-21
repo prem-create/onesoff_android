@@ -95,7 +95,7 @@ class SellerEarningsTab extends GetView<SellerEarningsController> {
         ),
 
         controller.isEarningsSelected.value
-            ? const EarningSection()
+            ? Expanded(child: const EarningSection())
             : TransactionDetailsSection(),
       ],
     );

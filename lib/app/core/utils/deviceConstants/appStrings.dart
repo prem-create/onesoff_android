@@ -165,4 +165,17 @@ class AppStrings {
   static const String sellerEarningsMonthlyEarningsValue = 'Rs 1,000';
   static const String sellerEarningsNetIncomeValue = 'Rs 800';
   static const String sellerEarningsReceivedSavingValue = 'Rs 0';
+  static const String sellerEarningsBreakdownTitle = 'Earning Breakdown';
+  static const String sellerEarningsBreakdownSubtitle =
+      'Order-wise earnings table with filters, sorting, and pagination.';
+  static const String sellerEarningsBreakdownFilterAll = 'All';
+  static const String sellerEarningsBreakdownFilterPaid = 'Paid';
+  static const String sellerEarningsBreakdownFilterPending = 'Pending';
+  static const String sellerEarningsBreakdownFilterDiscard = 'Discard';
+  static const String sellerEarningsBreakdownRentalPriceLabel = 'Rental Price';
+  static const String sellerEarningsBreakdownCommissionLabel =
+      'Commission Amount';
+  static const String sellerEarningsEmptyTitle = 'No earnings rows yet';
+  static const String sellerEarningsEmptyDescription =
+      'Once order and payout data is connected, every deduction and net amount will appear here.';
 }
