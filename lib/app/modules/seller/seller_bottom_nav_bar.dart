@@ -9,6 +9,7 @@ import 'getx/controllers/seller_bottom_nav_bar_controller.dart';
 import 'tabs/sellerEarnings_tab/getx/controllers/seller_earnings_controller.dart';
 import 'tabs/sellerDashboard_tab/view/seller_dashboard_tab.dart';
 import 'tabs/sellerEarnings_tab/view/seller_earnings_tab.dart';
+import 'tabs/sellerProfile_tab/view/seller_profile_tab.dart';
 import 'tabs/sellerProducts_tab/view/seller_products_tab.dart';
 
 class SellerBottomNavBar extends GetView<SellerBottomNavBarController> {
@@ -37,7 +38,7 @@ class SellerBottomNavBar extends GetView<SellerBottomNavBarController> {
     SellerDashboardTab(),
     SellerProductsTab(),
     SellerEarningsTab(),
-    SizedBox.shrink(),
+    SellerProfileTab(),
   ];
 
   @override
@@ -68,6 +69,8 @@ class SellerBottomNavBar extends GetView<SellerBottomNavBarController> {
         return _productsAppBar(context);
       case 2:
         return _earningsAppBar(context);
+      case 3:
+        return _profileAppBar(context);
 
       default:
         return AppBar(backgroundColor: AppColors.dashboardSurface);
@@ -84,6 +87,27 @@ class SellerBottomNavBar extends GetView<SellerBottomNavBarController> {
       titleSpacing: DeviceResponsive.w(context, 2),
       leading: const _SellerDashboardLogo(),
       title: const _SellerDashboardTitle(),
+      actions: const <Widget>[_SellerNotificationButton()],
+    );
+  }
+
+  AppBar _profileAppBar(BuildContext context) {
+    return AppBar(
+      backgroundColor: AppColors.primary,
+      elevation: 0,
+      surfaceTintColor: AppColors.dashboardSurface,
+      toolbarHeight: kToolbarHeight,
+      titleSpacing: DeviceResponsive.w(context, 16),
+      title: Text(
+        AppStrings.sellerProfileTabAppBarTitle,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: DeviceResponsive.sp(context, 18, minScale: 0.92),
+          fontWeight: FontWeight.w700,
+        ),
+      ),
       actions: const <Widget>[_SellerNotificationButton()],
     );
   }

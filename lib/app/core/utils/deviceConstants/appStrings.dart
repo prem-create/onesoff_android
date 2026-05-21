@@ -139,6 +139,63 @@ class AppStrings {
   static const String sellerNavProducts = 'Products';
   static const String sellerNavEarnings = 'Earnings';
   static const String sellerNavProfile = 'Profile';
+  static const String sellerProfileTabAppBarTitle = 'Profile';
+  static const String sellerProfileName = 'shivam';
+  static const String sellerProfileEmail = 'shivam@gmail.com';
+  static const String sellerProfileStatusActive = 'Active';
+  static const String sellerProfileStatusApproved = 'Approved';
+  static const String sellerProfileTabOverview = 'Overview';
+  static const String sellerProfileTabPersonalInfo = 'Personal Info';
+  static const String sellerProfileTabKycVerification = 'KYC & Verification';
+  static const String sellerProfileTabBankDetails = 'Bank Details';
+  static const String sellerProfileTabEditProfile = 'Edit Profile';
+  static const String sellerProfileEditTitle = 'Edit profile';
+  static const String sellerProfileEditSubtitle =
+      'Update your profile information. Changes will be saved to the database.';
+  static const String sellerProfileOverviewTitle = 'Profile Overview';
+  static const String sellerProfilePersonalInfoTitle = 'Personal Information';
+  static const String sellerProfileBankDetailsTitle = 'Bank Details';
+  static const String sellerProfileKycTitle = 'KYC & Verification Details';
+  static const String sellerProfileVerificationDocumentsTitle =
+      'Verification Documents';
+  static const String sellerProfileVerificationStatusTitle =
+      'Verification Status';
+  static const String sellerProfileOwnerNameLabel = 'Owner Name';
+  static const String sellerProfileEmailLabel = 'Email';
+  static const String sellerProfilePhoneLabel = 'Phone';
+  static const String sellerProfileOccupationLabel = 'Occupation';
+  static const String sellerProfileCityStateLabel = 'City / State';
+  static const String sellerProfileCityLabel = 'City';
+  static const String sellerProfileStateLabel = 'State';
+  static const String sellerProfilePincodeLabel = 'Pincode';
+  static const String sellerProfileShopNameLabel = 'Shop Name';
+  static const String sellerProfileAddressLabel = 'Address';
+  static const String sellerProfileAccountHolderNameLabel =
+      'Account Holder Name';
+  static const String sellerProfileBankAccountNumberLabel =
+      'Bank Account Number';
+  static const String sellerProfileIfscCodeLabel = 'IFSC Code';
+  static const String sellerProfileUpiIdLabel = 'UPI ID';
+  static const String sellerProfileIdProofTypeLabel = 'ID Proof Type';
+  static const String sellerProfileOwnershipDeclarationLabel =
+      'Ownership Declaration';
+  static const String sellerProfileIdProofLabel = 'ID Proof';
+  static const String sellerProfileVerificationStatusLabel =
+      'Verification Status';
+  static const String sellerProfilePhoneValue = '+911234567890';
+  static const String sellerProfileOccupationValue = 'vedore';
+  static const String sellerProfileCityValue = 'Indore';
+  static const String sellerProfileStateValue = 'Madhya Pradesh';
+  static const String sellerProfilePincodeValue = '452001';
+  static const String sellerProfileAddressValue = 'vijay nagar';
+  static const String sellerProfileIdProofTypeValue = 'Aadhar';
+  static const String sellerProfileOwnershipDeclarationValue = 'Yes';
+  static const String sellerProfileIdProofDocumentValue = 'meal-plan (1).pdf';
+  static const String sellerProfileVerificationStatusValue =
+      'Your KYC documents have been submitted and are under review. You will receive an update within 24-48 hours.';
+  static const String sellerProfileEmptyValue = 'Empty';
+  static const String sellerProfileSaveChanges = 'Save Changes';
+  static const String sellerProfileDiscardChanges = 'Discard Changes';
 
   static const String sellerDashboardWelcomeBack = 'Welcome back';
   static const String sellerMetricTotalOutfitListed = 'Total outfit Listed';
