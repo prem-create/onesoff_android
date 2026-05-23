@@ -131,6 +131,211 @@ class AppStrings {
   static const String welcomeVendorTitle = 'Welcome as Vendor';
   static const String welcomeVendorDescription =
       'Your vendor profile is all set up. Let\'s start managing your store.';
+  static const String vendor1NavDashboard = 'Dashboard';
+  static const String vendor1NavInventory = 'Inventory';
+  static const String vendor1NavOrders = 'Orders';
+  static const String vendor1NavEarnings = 'Earnings';
+  static const String vendor1NavProfile = 'Profile';
+  static const String vendor1SearchHint =
+      'search by SKU, Product, Category, gender, brand, etc';
+  static const String vendor1DashboardTitle = 'Vendor Dashboard';
+  static const String vendor1DashboardSubtitle = 'Your business at a glance.';
+  static const String vendor1MetricTotalRentals = 'Total Rentals';
+  static const String vendor1MetricActiveRentalsOutNow =
+      'Active Rentals (Out Now)';
+  static const String vendor1MetricTotalRevenue = 'Total Revenue';
+  static const String vendor1MetricPendingDepositRefund =
+      'Pending Deposit Refund';
+  static const String vendor1MetricReturnsDueToday = 'Returns Due Today';
+  static const String vendor1MetricReturnsOverdue = 'Returns Overdue';
+  static const String vendor1MetricTrialConversion = 'Trial Conversion %';
+  static const String vendor1MetricZeroCount = '0';
+  static const String vendor1MetricZeroRevenue = '₹0';
+  static const String vendor1MetricZeroPercent = '0.00%';
+  static const String vendor1AnalyticsOverviewTitle = 'Analytics Overview';
+  static const String vendor1AnalyticsRange7d = '7D';
+  static const String vendor1AnalyticsRange30d = '30D';
+  static const String vendor1AnalyticsRange90d = '90D';
+  static const String vendor1AnalyticsRangeCustom = 'Custom';
+  static const String vendor1RevenueByCategoryTitle = 'Revenue by Category';
+  static const String vendor1RevenueByCategoryEmpty =
+      'No Revenue Distribution yet';
+  static const String vendor1OrdersRevenueTrendTitle =
+      'order and revenue trend';
+  static const String vendor1TotalOrdersLabel = 'Total orders';
+  static const String vendor1GrowthLabel = 'Growth';
+  static const String vendor1OrdersLegend = 'Orders';
+  static const String vendor1RevenueLegend = 'Revenue';
+  static const String vendor1StartDateLabel = 'Start Date';
+  static const String vendor1EndDateLabel = 'End Date';
+  static const String vendor1RecentOrdersTitle = 'Recent Orders';
+  static const String vendor1ViewButton = 'View';
+  static const String vendor1NoOrderFound = 'No Order Found';
+  static const String vendor1InventorySectionProductList = 'Product List';
+  static const String vendor1InventorySectionOperations = 'Operations';
+  static const String vendor1InventorySectionRentalAvailability =
+      'Rental Availability';
+  static const String vendor1InventorySectionAgreements = 'Agreements';
+  static const String vendor1InventoryTitle = 'Product List';
+  static const String vendor1InventorySubtitle =
+      'Manage and monitor all your listed products';
+  static const String vendor1InventoryAddProduct = 'Add Product';
+  static const String vendor1InventoryMetricTotalProducts = 'Total Products';
+  static const String vendor1InventoryMetricActiveListings = 'Active Listings';
+  static const String vendor1InventoryMetricPendingProducts =
+      'Pending Products';
+  static const String vendor1InventoryMetricInactive = 'Inactive';
+  static const String vendor1InventoryMetricOne = '1';
+  static const String vendor1InventorySearchHint =
+      'seact by product, SKU, category or gender';
+  static const String vendor1InventoryCategoryAll = 'All Categories';
+  static const String vendor1InventoryCategoryMen = 'Men';
+  static const String vendor1InventoryCategorySherwani = 'Sherwani';
+  static const String vendor1InventoryCategorySuit = 'Suit';
+  static const String vendor1InventoryCategoryBlazer = 'Blazer';
+  static const String vendor1InventoryCategoryTuxedo = 'Tuxedo';
+  static const String vendor1InventoryCategoryOthers = 'Others';
+  static const String vendor1InventoryCategoryWomen = 'Women';
+  static const String vendor1InventoryCategorySaree = 'Saree';
+  static const String vendor1InventoryCategoryLehenga = 'Lehenga';
+  static const String vendor1InventoryCategoryGown = 'Gown';
+  static const String vendor1InventoryCategoryBridalWear = 'Bridal Wear';
+  static const String vendor1InventoryCategoryAccessoriesJewellery =
+      'Accessories/Jewellery';
+  static const String vendor1InventoryCategoryJewellery = 'Jewellery';
+  static const String vendor1InventoryCategoryAccessories = 'Accessories';
+  static const String vendor1InventoryStatusAll = 'All Status';
+  static const String vendor1InventoryStatusActive = 'Active';
+  static const String vendor1InventoryStatusInactive = 'Inactive';
+  static const String vendor1InventoryStatusOutOfStock = 'Out of Stock';
+  static const String vendor1InventoryDateToday = 'Today';
+  static const String vendor1InventoryDateYesterday = 'Yesterday';
+  static const String vendor1InventoryDateLast7Days = 'Last 7 Days';
+  static const String vendor1InventoryDateLast30Days = 'Last 30 Days';
+  static const String vendor1InventoryDateLast90Days = 'Last 90 Days';
+  static const String vendor1InventoryDateCustomRange = 'Custom Range';
+  static const String vendor1InventoryProductName = 'Banarasi Saree';
+  static const String vendor1InventoryProductSku = 'SKU: SAR00083';
+  static const String vendor1InventoryProductRentPrice = '₹580';
+  static const String vendor1InventoryProductCategory = 'women';
+  static const String vendor1InventoryProductGender = 'Female';
+  static const String vendor1InventoryProductStock = '1';
+  static const String vendor1InventoryProductStatus = 'Active';
+  static const String vendor1InventoryStockPrefix = 'x';
+  static const String vendor1InventoryViewAction = 'View';
+  static const String vendor1InventoryEditAction = 'Edit';
+  static const String vendor1InventoryDeleteAction = 'Delete';
+  static const String vendor1InventoryOperationsTitle = 'Operations';
+  static const String vendor1InventoryOperationsSubtitle =
+      'Manage quality checks, damage claims, and maintenance for your products';
+  static const String vendor1InventoryOperationPendingQualityCheck =
+      'Pending Quality Check';
+  static const String vendor1InventoryOperationDamageRepairQueue =
+      'Damage / Repair Queue';
+  static const String vendor1InventoryOperationMaintenanceQueue =
+      'Maintenance Queue';
+  static const String vendor1InventoryOperationQualityCheck = 'Quality check';
+  static const String vendor1InventoryOperationDamageRepair =
+      'damage and repair';
+  static const String vendor1InventoryOperationMaintainance = 'maintainance';
+  static const String vendor1InventoryOperationLogistics = 'logistics';
+  static const String vendor1InventoryOperationNoQcTitle =
+      'No items pending QC';
+  static const String vendor1InventoryOperationNoQcSubtitle =
+      'Returned orders for your products will appear here as soon as they are marked returned.';
+  static const String vendor1InventoryOperationNoDamageTitle =
+      'No damage or repair items';
+  static const String vendor1InventoryOperationNoDamageSubtitle =
+      'Items marked as repair or damage during inspection for your products will appear here.';
+  static const String vendor1InventoryOperationNoMaintenanceTitle =
+      'No maintenance tasks';
+  static const String vendor1InventoryOperationNoMaintenanceSubtitle =
+      'Passed inspections for your products are scheduled here automatically for maintenance.';
+  static const String vendor1InventoryOperationLogisticsSoonTitle =
+      'Logistics module coming soon';
+  static const String vendor1InventoryOperationLogisticsSoonSubtitle =
+      'Track and manage shipping, delivery, and pickup for your products.';
+  static const String vendor1InventoryAgreementsTitle = 'Agreements';
+  static const String vendor1InventoryAgreementsSubtitle =
+      'Keep revenue share, document access, and important policies easy to review before payouts and disputes.';
+  static const String vendor1InventoryAgreementRevenueShare = 'Revenue Share';
+  static const String vendor1InventoryAgreementContractVersion =
+      'Contract Version';
+  static const String vendor1InventoryAgreementSignedOn = 'Signed On';
+  static const String vendor1InventoryAgreementEffectiveFrom = 'Effective From';
+  static const String vendor1InventoryAgreementRevenueShareValue = '0%';
+  static const String vendor1InventoryAgreementContractVersionValue = '--';
+  static const String vendor1InventoryAgreementDateValue = '22 May 2026';
+  static const String vendor1InventoryAgreementPoliciesTitle =
+      'Agreements and Policies';
+  static const String vendor1InventoryAgreementPoliciesSubtitle =
+      'All checked agreement terms from your registration remain visible for legal clarity and reference.';
+  static const String vendor1InventoryAgreementTermPlatformTerms =
+      'I accept the platform terms and conditions.';
+  static const String vendor1InventoryAgreementTermCommissionAgreement =
+      'I accept the commission agreement.';
+  static const String vendor1InventoryAgreementTermCancellationPolicy =
+      'I accept the cancellation policy.';
+  static const String vendor1InventoryAgreementTermDepositRules =
+      'I accept the deposit rules.';
+  static const String vendor1InventoryAgreementTermOrderHandling =
+      'I agree to order handling responsibility.';
+  static const String vendor1InventoryAgreementTermQualityStandards =
+      'I agree to maintain platform quality standards.';
+  static const String vendor1InventoryAgreementTermReturnHandling =
+      'I agree to return handling responsibilities.';
+  static const String vendor1OrdersSectionOrders = 'Orders';
+  static const String vendor1OrdersSectionTrailAvailability = 'Trial Requests';
+  static const String vendor1OrdersTitle = 'Orders';
+  static const String vendor1OrdersSubtitle = 'Manage and track your orders';
+  static const String vendor1OrdersStatusAll = 'All Orders';
+  static const String vendor1OrdersStatusBooked = 'Booked';
+  static const String vendor1OrdersStatusReadyForPickup = 'Ready for Pickup';
+  static const String vendor1OrdersStatusPickedUp = 'Picked Up';
+  static const String vendor1OrdersStatusReturnScheduled = 'Return Scheduled';
+  static const String vendor1OrdersStatusReturned = 'Returned';
+  static const String vendor1OrdersSearchHint = 'Search orders';
+  static const String vendor1OrdersNoOrdersFound = 'No Orders Found';
+  static const String vendor1TrialRequestsTitle = 'Trial Requests';
+  static const String vendor1TrialRequestsSubtitle =
+      'Manage customer trial requests and verify trial codes';
+  static const String vendor1TrialRequestsMetricTotal = 'Total';
+  static const String vendor1TrialRequestsMetricPending = 'Pending';
+  static const String vendor1TrialRequestsMetricAccepted = 'Accepted';
+  static const String vendor1TrialRequestsMetricStarted = 'Started';
+  static const String vendor1TrialRequestsMetricRejected = 'Rejected';
+  static const String vendor1TrialRequestsMetricCompleted = 'Completed';
+  static const String vendor1TrialRequestsFilterAll = 'all';
+  static const String vendor1TrialRequestsFilterPending = 'pending';
+  static const String vendor1TrialRequestsFilterAccepted = 'accepted';
+  static const String vendor1TrialRequestsFilterStarted = 'started';
+  static const String vendor1TrialRequestsFilterRejected = 'rejected';
+  static const String vendor1TrialRequestsFilterCompleted = 'completed';
+  static const String vendor1TrialRequestsSearchHint = 'Search trial requests';
+  static const String vendor1TrialRequestsEmptyTitle =
+      'No trial requests found';
+  static const String vendor1TrialRequestsEmptySubtitle =
+      'Try adjusting your filters or search term';
+  static const String vendor1EarningsSectionEarnings = 'Earnings';
+  static const String vendor1EarningsSectionRaiseClaims = 'Raise Claims';
+  static const String vendor1EarningsTitle = 'Earnings';
+  static const String vendor1EarningsSubtitle =
+      'Track payouts, commissions, and liabilities';
+  static const String vendor1EarningsGrossRentalRevenue =
+      'Gross Rental Revenue';
+  static const String vendor1EarningsCommissionDeducted = 'Commission Deducted';
+  static const String vendor1EarningsNetIncome = 'Net Income';
+  static const String vendor1EarningsPendingPayout = 'Pending Payout';
+  static const String vendor1EarningsDepositLiability = 'Deposit Liability';
+  static const String vendor1EarningsZeroCurrency = '₹0';
+  static const String vendor1EarningsSearchHint = 'Search earnings';
+  static const String vendor1EarningsEmptyTransactions =
+      'No transactions found';
+  static const String vendor1EarningsRangeAllTime = 'All Time';
+  static const String vendor1EarningsRangeThisWeek = 'This Week';
+  static const String vendor1EarningsRangeThisMonth = 'This Month';
+  static const String vendor1EarningsRangeThisYear = 'This Year';
+  static const String vendor1EarningsRangeCustomDate = 'Custom Date';
 
   static const String sellerBrandTitle = 'Onesoff';
   static const String sellerName = 'Sheetal';

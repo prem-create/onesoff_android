@@ -13,4 +13,5 @@ abstract class AppRoutes {
   static const String seller = '/seller';
   static const String shopOwner = '/shop-owner';
   static const String adminAsVendor = '/admin-as-vendor';
+  static const String vendor1 = '/vendor1';
 }

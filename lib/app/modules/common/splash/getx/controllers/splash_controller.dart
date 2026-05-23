@@ -15,6 +15,6 @@ class SplashController extends GetxController {
     await Future<void>.delayed(_delay);
     if (isClosed) return;
     //TODO: change this back to onboarding 
-    Get.offNamed(AppRoutes.seller);
+    Get.offNamed(AppRoutes.vendor1);
   }
 }
